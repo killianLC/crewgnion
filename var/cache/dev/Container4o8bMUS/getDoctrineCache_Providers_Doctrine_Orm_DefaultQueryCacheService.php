@@ -18,6 +18,6 @@ include_once $this->targetDirs[3].'\\vendor\\doctrine\\cache\\lib\\Doctrine\\Com
 
 $this->services['doctrine_cache.providers.doctrine.orm.default_query_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
 
-$instance->setNamespace('sf_orm_default_760abcc8f61348b13c14efe83365cd7335c6b2224dd1216605a10036419bf092');
+$instance->setNamespace('sf_orm_default_f26654922a2163d28ed74cfb8b996f4b2e9b55c2486441ec394d7d5526cdbc38');
 
 return $instance;

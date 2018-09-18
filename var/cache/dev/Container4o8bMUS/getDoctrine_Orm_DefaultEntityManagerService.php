@@ -43,9 +43,7 @@ $b->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
 $b->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
 $b->setQuoteStrategy(new \Doctrine\ORM\Mapping\DefaultQuoteStrategy());
 $b->setEntityListenerResolver(new \Doctrine\Bundle\DoctrineBundle\Mapping\ContainerAwareEntityListenerResolver($this));
-$b->setRepositoryFactory(new \Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory(new \Symfony\Component\DependencyInjection\ServiceLocator(array('App\\Repository\\SalarieRepository' => function () {
-    return ($this->privates['App\Repository\SalarieRepository'] ?? $this->load('getSalarieRepositoryService.php'));
-}))));
+$b->setRepositoryFactory(new \Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory(($this->privates['.service_locator.9_yeNH1'] ?? $this->privates['.service_locator.9_yeNH1'] = new \Symfony\Component\DependencyInjection\ServiceLocator(array()))));
 
 $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create(($this->services['doctrine.dbal.default_connection'] ?? $this->load('getDoctrine_Dbal_DefaultConnectionService.php')), $b);
 
