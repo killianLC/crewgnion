@@ -64,22 +64,18 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         switch ($pathinfo) {
             default:
                 $routes = array(
-                    '/product' => array(array('_route' => 'product', '_controller' => 'App\\Controller\\ProductController::index'), null, null, null),
-                    '/' => array(array('_route' => 'app_test_index', '_controller' => 'App\\Controller\\TestController::indexAction'), null, null, null),
-                    '/contact' => array(array('_route' => 'app_test_contact', '_controller' => 'App\\Controller\\TestController::contactAction'), null, null, null),
-                    '/ajout' => array(array('_route' => 'app_test_ajoutsalarie', '_controller' => 'App\\Controller\\TestController::ajoutSalarie'), null, null, null),
                     '/_profiler/' => array(array('_route' => '_profiler_home', '_controller' => 'web_profiler.controller.profiler::homeAction'), null, null, null),
                     '/_profiler/search' => array(array('_route' => '_profiler_search', '_controller' => 'web_profiler.controller.profiler::searchAction'), null, null, null),
                     '/_profiler/search_bar' => array(array('_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'), null, null, null),
                     '/_profiler/phpinfo' => array(array('_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'), null, null, null),
                     '/_profiler/open' => array(array('_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'), null, null, null),
                 );
-
+    
                 if (!isset($routes[$pathinfo])) {
                     break;
                 }
                 list($ret, $requiredHost, $requiredMethods, $requiredSchemes) = $routes[$pathinfo];
-
+    
                 $hasRequiredScheme = !$requiredSchemes || isset($requiredSchemes[$context->getScheme()]);
                 if ($requiredMethods && !isset($requiredMethods[$canonicalMethod]) && !isset($requiredMethods[$requestMethod])) {
                     if ($hasRequiredScheme) {
@@ -91,7 +87,7 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     $allowSchemes += $requiredSchemes;
                     break;
                 }
-
+    
                 return $ret;
         }
 
@@ -129,15 +125,15 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                             149 => array(array('_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'), array('token'), null, null),
                             159 => array(array('_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'), array('token'), null, null),
                         );
-
+            
                         list($ret, $vars, $requiredMethods, $requiredSchemes) = $routes[$m];
-
+            
                         foreach ($vars as $i => $v) {
                             if (isset($matches[1 + $i])) {
                                 $ret[$v] = $matches[1 + $i];
                             }
                         }
-
+            
                         $hasRequiredScheme = !$requiredSchemes || isset($requiredSchemes[$context->getScheme()]);
                         if ($requiredMethods && !isset($requiredMethods[$canonicalMethod]) && !isset($requiredMethods[$requestMethod])) {
                             if ($hasRequiredScheme) {
@@ -149,7 +145,7 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                             $allowSchemes += $requiredSchemes;
                             break;
                         }
-
+            
                         return $ret;
                 }
 
