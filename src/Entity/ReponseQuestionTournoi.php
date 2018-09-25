@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,16 @@ class ReponseQuestionTournoi
      * @ORM\Column(type="boolean")
      */
     private $bonne_reponse_tournoi;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RepondreTournoi", mappedBy="ReponseQuestionTournois")
+     */
+    private $repondreTournois;
+
+    public function __construct()
+    {
+        $this->repondreTournois = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -51,6 +63,37 @@ class ReponseQuestionTournoi
     public function setBonneReponseTournoi(bool $bonne_reponse_tournoi): self
     {
         $this->bonne_reponse_tournoi = $bonne_reponse_tournoi;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RepondreTournoi[]
+     */
+    public function getRepondreTournois(): Collection
+    {
+        return $this->repondreTournois;
+    }
+
+    public function addRepondreTournois(RepondreTournoi $repondreTournois): self
+    {
+        if (!$this->repondreTournois->contains($repondreTournois)) {
+            $this->repondreTournois[] = $repondreTournois;
+            $repondreTournois->setReponseQuestionTournois($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepondreTournois(RepondreTournoi $repondreTournois): self
+    {
+        if ($this->repondreTournois->contains($repondreTournois)) {
+            $this->repondreTournois->removeElement($repondreTournois);
+            // set the owning side to null (unless already changed)
+            if ($repondreTournois->getReponseQuestionTournois() === $this) {
+                $repondreTournois->setReponseQuestionTournois(null);
+            }
+        }
 
         return $this;
     }

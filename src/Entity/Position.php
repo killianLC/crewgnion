@@ -33,9 +33,15 @@ class Position
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\QuestionApp", mappedBy="positions")
+     */
+    private $questionApps;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->questionApps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,6 +94,37 @@ class Position
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|QuestionApp[]
+     */
+    public function getQuestionApps(): Collection
+    {
+        return $this->questionApps;
+    }
+
+    public function addQuestionApp(QuestionApp $questionApp): self
+    {
+        if (!$this->questionApps->contains($questionApp)) {
+            $this->questionApps[] = $questionApp;
+            $questionApp->setPositions($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestionApp(QuestionApp $questionApp): self
+    {
+        if ($this->questionApps->contains($questionApp)) {
+            $this->questionApps->removeElement($questionApp);
+            // set the owning side to null (unless already changed)
+            if ($questionApp->getPositions() === $this) {
+                $questionApp->setPositions(null);
+            }
         }
 
         return $this;

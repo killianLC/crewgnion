@@ -49,10 +49,18 @@ $b->setRepositoryFactory(new \Doctrine\Bundle\DoctrineBundle\Repository\Containe
     return ($this->privates['App\Repository\ParticiperRepository'] ?? $this->load('getParticiperRepositoryService.php'));
 }, 'App\\Repository\\PositionRepository' => function () {
     return ($this->privates['App\Repository\PositionRepository'] ?? $this->load('getPositionRepositoryService.php'));
+}, 'App\\Repository\\QuestionRepository' => function () {
+    return ($this->privates['App\Repository\QuestionRepository'] ?? $this->load('getQuestionRepositoryService.php'));
+}, 'App\\Repository\\QuestionTournoiRepository' => function () {
+    return ($this->privates['App\Repository\QuestionTournoiRepository'] ?? $this->load('getQuestionTournoiRepositoryService.php'));
+}, 'App\\Repository\\QuestionnaireRepository' => function () {
+    return ($this->privates['App\Repository\QuestionnaireRepository'] ?? $this->load('getQuestionnaireRepositoryService.php'));
 }, 'App\\Repository\\QueteRepository' => function () {
     return ($this->privates['App\Repository\QueteRepository'] ?? $this->load('getQueteRepositoryService.php'));
 }, 'App\\Repository\\RepondreRepository' => function () {
     return ($this->privates['App\Repository\RepondreRepository'] ?? $this->load('getRepondreRepositoryService.php'));
+}, 'App\\Repository\\RepondreTournoiRepository' => function () {
+    return ($this->privates['App\Repository\RepondreTournoiRepository'] ?? $this->load('getRepondreTournoiRepositoryService.php'));
 }, 'App\\Repository\\ReponseQuestionTournoiRepository' => function () {
     return ($this->privates['App\Repository\ReponseQuestionTournoiRepository'] ?? $this->load('getReponseQuestionTournoiRepositoryService.php'));
 }, 'App\\Repository\\ReponseRepository' => function () {

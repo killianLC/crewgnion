@@ -21,6 +21,11 @@ class RepondreTournoi
      */
     private $users;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ReponseQuestionTournoi", inversedBy="repondreTournois")
+     */
+    private $ReponseQuestionTournois;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +39,18 @@ class RepondreTournoi
     public function setUsers(?User $users): self
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getReponseQuestionTournois(): ?ReponseQuestionTournoi
+    {
+        return $this->ReponseQuestionTournois;
+    }
+
+    public function setReponseQuestionTournois(?ReponseQuestionTournoi $ReponseQuestionTournois): self
+    {
+        $this->ReponseQuestionTournois = $ReponseQuestionTournois;
 
         return $this;
     }

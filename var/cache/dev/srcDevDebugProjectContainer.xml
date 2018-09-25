@@ -389,6 +389,22 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Repository\QuestionAppRepository" class="App\Repository\QuestionAppRepository" public="false" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\QuestionRepository" class="App\Repository\QuestionRepository" public="false" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\QuestionTournoiRepository" class="App\Repository\QuestionTournoiRepository" public="false" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\QuestionnaireRepository" class="App\Repository\QuestionnaireRepository" public="false" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\QueteRepository" class="App\Repository\QueteRepository" public="false" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -2661,7 +2677,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator.w2Nsbf."/>
+      <argument type="service" id=".service_locator.oAXAiKF"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -4266,6 +4282,14 @@
     <service id=".abstract.instanceof.App\Repository\ParticiperRepository" class="App\Repository\ParticiperRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PositionRepository" class="App\Repository\PositionRepository" public="false" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\PositionRepository" class="App\Repository\PositionRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\QuestionAppRepository" class="App\Repository\QuestionAppRepository" public="false" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\QuestionAppRepository" class="App\Repository\QuestionAppRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\QuestionRepository" class="App\Repository\QuestionRepository" public="false" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\QuestionRepository" class="App\Repository\QuestionRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\QuestionTournoiRepository" class="App\Repository\QuestionTournoiRepository" public="false" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\QuestionTournoiRepository" class="App\Repository\QuestionTournoiRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\QuestionnaireRepository" class="App\Repository\QuestionnaireRepository" public="false" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\QuestionnaireRepository" class="App\Repository\QuestionnaireRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\QueteRepository" class="App\Repository\QueteRepository" public="false" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\QueteRepository" class="App\Repository\QueteRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\RepondreRepository" class="App\Repository\RepondreRepository" public="false" autowire="true" abstract="true"/>
@@ -4497,12 +4521,16 @@
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service" id="form.type.form"/>
       </argument>
     </service>
-    <service id=".service_locator.w2Nsbf." class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.oAXAiKF" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\GradeRepository" type="service" id="App\Repository\GradeRepository"/>
         <argument key="App\Repository\ParticiperRepository" type="service" id="App\Repository\ParticiperRepository"/>
         <argument key="App\Repository\PositionRepository" type="service" id="App\Repository\PositionRepository"/>
+        <argument key="App\Repository\QuestionAppRepository" type="service" id="App\Repository\QuestionAppRepository"/>
+        <argument key="App\Repository\QuestionRepository" type="service" id="App\Repository\QuestionRepository"/>
+        <argument key="App\Repository\QuestionTournoiRepository" type="service" id="App\Repository\QuestionTournoiRepository"/>
+        <argument key="App\Repository\QuestionnaireRepository" type="service" id="App\Repository\QuestionnaireRepository"/>
         <argument key="App\Repository\QueteRepository" type="service" id="App\Repository\QueteRepository"/>
         <argument key="App\Repository\RepondreRepository" type="service" id="App\Repository\RepondreRepository"/>
         <argument key="App\Repository\RepondreTournoiRepository" type="service" id="App\Repository\RepondreTournoiRepository"/>
