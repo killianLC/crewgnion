@@ -173,6 +173,6 @@ class __TwigTemplate_25761e15a5dfc19c802ca23ac5a018f5bd6c4b7a518c8afb27ccfb5866c
         </div>
     </div>
 </div>
-", "@Twig/Exception/traces.html.twig", "C:\\wamp64\\www\\BTS 2eme annee\\PPE\\PPE3\\crewgnion\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\traces.html.twig");
+", "@Twig/Exception/traces.html.twig", "C:\\wamp64\\www\\crewgnion\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\traces.html.twig");
     }
 }
