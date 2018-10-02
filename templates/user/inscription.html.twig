@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{asset('build/css/app.css')}}">   
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <h1>Starfoullah</h1>
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {% block body %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}            
+            <button type="submit" class="btn btn-primary ">ok</button>
+            {{ form_end(form) }}
+            {% endblock %}
+            {% block javascripts %}{% endblock %}
+         </div>
+    </body>
+</html>
