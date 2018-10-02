@@ -1156,6 +1156,6 @@ class __TwigTemplate_6d84eedc4ab2c4591a27c2d3f6d1b8928fba6b95d0f1df6c81d1d6e9433
         </table>
     {% endif %}
 {% endblock %}
-", "@Security/Collector/security.html.twig", "D:\\wamp64\\www\\test\\vendor\\symfony\\security-bundle\\Resources\\views\\Collector\\security.html.twig");
+", "@Security/Collector/security.html.twig", "D:\\wamp64\\www\\crewgnion\\vendor\\symfony\\security-bundle\\Resources\\views\\Collector\\security.html.twig");
     }
 }

@@ -174,6 +174,6 @@ class __TwigTemplate_6d0565818ac034db0cff9492065523936147715eb3857ec77f18ffea948
     {% endfor %}
     </tbody>
 </table>
-", "@Twig/Exception/logs.html.twig", "D:\\wamp64\\www\\test\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\logs.html.twig");
+", "@Twig/Exception/logs.html.twig", "D:\\wamp64\\www\\crewgnion\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\logs.html.twig");
     }
 }

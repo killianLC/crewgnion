@@ -20,6 +20,10 @@ class srcDevDebugProjectContainerUrlGenerator extends Symfony\Component\Routing\
         $this->defaultLocale = $defaultLocale;
         if (null === self::$declaredRoutes) {
             self::$declaredRoutes = array(
+        'user' => array(array(), array('_controller' => 'App\\Controller\\UserController::index'), array(), array(array('text', '/user')), array(), array()),
+        'app_user_acc' => array(array(), array('_controller' => 'App\\Controller\\UserController::acc'), array(), array(array('text', '/accueil')), array(), array()),
+        'app_user_inscription' => array(array(), array('_controller' => 'App\\Controller\\UserController::inscription'), array(), array(array('text', '/inscription')), array(), array()),
+        'app_user_connexion' => array(array(), array('_controller' => 'App\\Controller\\UserController::connexion'), array(), array(array('text', '/connexion')), array(), array()),
         '_twig_error_test' => array(array('code', '_format'), array('_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'), array('code' => '\\d+'), array(array('variable', '.', '[^/]++', '_format'), array('variable', '/', '\\d+', 'code'), array('text', '/_error')), array(), array()),
         '_wdt' => array(array('token'), array('_controller' => 'web_profiler.controller.profiler::toolbarAction'), array(), array(array('variable', '/', '[^/]++', 'token'), array('text', '/_wdt')), array(), array()),
         '_profiler_home' => array(array(), array('_controller' => 'web_profiler.controller.profiler::homeAction'), array(), array(array('text', '/_profiler/')), array(), array()),

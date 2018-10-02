@@ -829,7 +829,7 @@ class __TwigTemplate_d8f36416742356c11aa052db9623d2b03d70dcf7b56521fcae15572fbb3
             $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "macro", "dump_request_data"));
 
             // line 509
-            $context["__internal_5e9cfe553787bef9713451c5d035e6ed82ea32af6caf3b9b1d692045dfcdab0f"] = $this;
+            $context["__internal_b354e7d4d6eaf5230035ae54e0eb461e51cf60cc749aa148b9c380e164eb6bed"] = $this;
             // line 510
             echo "                {
                     \"id\": \"";
@@ -843,7 +843,7 @@ class __TwigTemplate_d8f36416742356c11aa052db9623d2b03d70dcf7b56521fcae15572fbb3
                     \"events\": [
 ";
             // line 514
-            echo $context["__internal_5e9cfe553787bef9713451c5d035e6ed82ea32af6caf3b9b1d692045dfcdab0f"]->macro_dump_events((isset($context["events"]) || array_key_exists("events", $context) ? $context["events"] : (function () { throw new Twig_Error_Runtime('Variable "events" does not exist.', 514, $this->source); })()));
+            echo $context["__internal_b354e7d4d6eaf5230035ae54e0eb461e51cf60cc749aa148b9c380e164eb6bed"]->macro_dump_events((isset($context["events"]) || array_key_exists("events", $context) ? $context["events"] : (function () { throw new Twig_Error_Runtime('Variable "events" does not exist.', 514, $this->source); })()));
             echo "
                     ]
                 }
@@ -1627,6 +1627,6 @@ class __TwigTemplate_d8f36416742356c11aa052db9623d2b03d70dcf7b56521fcae15572fbb3
         <canvas width=\"680\" height=\"\" id=\"{{ id }}\" class=\"timeline\"></canvas>
     </div>
 {% endmacro %}
-", "@WebProfiler/Collector/time.html.twig", "D:\\wamp64\\www\\test\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\time.html.twig");
+", "@WebProfiler/Collector/time.html.twig", "D:\\wamp64\\www\\crewgnion\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\time.html.twig");
     }
 }

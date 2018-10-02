@@ -41,16 +41,18 @@ class __TwigTemplate_3d32c9fa5b871566cb37e6c9fc1f894a4e442dab43c7edbab0927c81f52
         ";
         // line 6
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 7
+        // line 13
         echo "    </head>
     <body>
+        
+        
         ";
-        // line 9
+        // line 17
         $this->displayBlock('body', $context, $blocks);
-        // line 10
+        // line 18
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 11
+        // line 19
         echo "    </body>
 </html>
 ";
@@ -71,7 +73,7 @@ class __TwigTemplate_3d32c9fa5b871566cb37e6c9fc1f894a4e442dab43c7edbab0927c81f52
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Welcome!";
+        echo "Crewgnion";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -89,6 +91,15 @@ class __TwigTemplate_3d32c9fa5b871566cb37e6c9fc1f894a4e442dab43c7edbab0927c81f52
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
+        // line 7
+        echo "        <link rel=\"stylesheet\" href=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("build/css/app.css"), "html", null, true);
+        echo "\">
+        <meta charset=\"utf-8\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\" type=\"text/css\">
+        <link rel=\"stylesheet\" href=\"theme.css\" type=\"text/css\"> 
+        ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -97,7 +108,7 @@ class __TwigTemplate_3d32c9fa5b871566cb37e6c9fc1f894a4e442dab43c7edbab0927c81f52
 
     }
 
-    // line 9
+    // line 17
     public function block_body($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -114,7 +125,7 @@ class __TwigTemplate_3d32c9fa5b871566cb37e6c9fc1f894a4e442dab43c7edbab0927c81f52
 
     }
 
-    // line 10
+    // line 18
     public function block_javascripts($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -138,7 +149,7 @@ class __TwigTemplate_3d32c9fa5b871566cb37e6c9fc1f894a4e442dab43c7edbab0927c81f52
 
     public function getDebugInfo()
     {
-        return array (  118 => 10,  101 => 9,  84 => 6,  66 => 5,  54 => 11,  51 => 10,  49 => 9,  45 => 7,  43 => 6,  39 => 5,  33 => 1,);
+        return array (  129 => 18,  112 => 17,  95 => 7,  86 => 6,  68 => 5,  56 => 19,  53 => 18,  51 => 17,  45 => 13,  43 => 6,  39 => 5,  33 => 1,);
     }
 
     public function getSourceContext()
@@ -147,14 +158,22 @@ class __TwigTemplate_3d32c9fa5b871566cb37e6c9fc1f894a4e442dab43c7edbab0927c81f52
 <html>
     <head>
         <meta charset=\"UTF-8\">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Crewgnion{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel=\"stylesheet\" href=\"{{asset('build/css/app.css')}}\">
+        <meta charset=\"utf-8\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\" type=\"text/css\">
+        <link rel=\"stylesheet\" href=\"theme.css\" type=\"text/css\"> 
+        {% endblock %}
     </head>
     <body>
+        
+        
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "D:\\wamp64\\www\\test\\templates\\base.html.twig");
+", "base.html.twig", "D:\\wamp64\\www\\crewgnion\\templates\\base.html.twig");
     }
 }
