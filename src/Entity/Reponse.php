@@ -26,6 +26,12 @@ class Reponse
      */
     private $reponse_bonne;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="reponses")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $question;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +57,18 @@ class Reponse
     public function setReponseBonne(?bool $reponse_bonne): self
     {
         $this->reponse_bonne = $reponse_bonne;
+
+        return $this;
+    }
+
+    public function getQuestion(): ?Question
+    {
+        return $this->question;
+    }
+
+    public function setQuestion(?Question $question): self
+    {
+        $this->question = $question;
 
         return $this;
     }

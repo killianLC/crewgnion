@@ -46,10 +46,7 @@ class User
      */
     private $grade;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Position", mappedBy="users")
-     */
-    private $positions;
+    
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Participer", mappedBy="users")
@@ -57,16 +54,22 @@ class User
     private $participers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\RepondreTournoi", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Position", mappedBy="users")
      */
-    private $repondreTournois;
+    private $positions;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Questionnaire", mappedBy="users")
+     */
+    private $questionnaires;
+
 
     public function __construct()
     {
         $this->quetes = new ArrayCollection();
-        $this->positions = new ArrayCollection();
         $this->participers = new ArrayCollection();
-        $this->repondreTournois = new ArrayCollection();
+        $this->positions = new ArrayCollection();
+        $this->questionnaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -165,34 +168,6 @@ class User
     }
 
     /**
-     * @return Collection|Position[]
-     */
-    public function getPositions(): Collection
-    {
-        return $this->positions;
-    }
-
-    public function addPosition(Position $position): self
-    {
-        if (!$this->positions->contains($position)) {
-            $this->positions[] = $position;
-            $position->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removePosition(Position $position): self
-    {
-        if ($this->positions->contains($position)) {
-            $this->positions->removeElement($position);
-            $position->removeUser($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Participer[]
      */
     public function getParticipers(): Collection
@@ -224,33 +199,59 @@ class User
     }
 
     /**
-     * @return Collection|RepondreTournoi[]
+     * @return Collection|Position[]
      */
-    public function getRepondreTournois(): Collection
+    public function getPositions(): Collection
     {
-        return $this->repondreTournois;
+        return $this->positions;
     }
 
-    public function addRepondreTournois(RepondreTournoi $repondreTournois): self
+    public function addPosition(Position $position): self
     {
-        if (!$this->repondreTournois->contains($repondreTournois)) {
-            $this->repondreTournois[] = $repondreTournois;
-            $repondreTournois->setUsers($this);
+        if (!$this->positions->contains($position)) {
+            $this->positions[] = $position;
+            $position->addUser($this);
         }
 
         return $this;
     }
 
-    public function removeRepondreTournois(RepondreTournoi $repondreTournois): self
+    public function removePosition(Position $position): self
     {
-        if ($this->repondreTournois->contains($repondreTournois)) {
-            $this->repondreTournois->removeElement($repondreTournois);
-            // set the owning side to null (unless already changed)
-            if ($repondreTournois->getUsers() === $this) {
-                $repondreTournois->setUsers(null);
-            }
+        if ($this->positions->contains($position)) {
+            $this->positions->removeElement($position);
+            $position->removeUser($this);
         }
 
         return $this;
     }
+
+    /**
+     * @return Collection|Questionnaire[]
+     */
+    public function getQuestionnaires(): Collection
+    {
+        return $this->questionnaires;
+    }
+
+    public function addQuestionnaire(Questionnaire $questionnaire): self
+    {
+        if (!$this->questionnaires->contains($questionnaire)) {
+            $this->questionnaires[] = $questionnaire;
+            $questionnaire->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestionnaire(Questionnaire $questionnaire): self
+    {
+        if ($this->questionnaires->contains($questionnaire)) {
+            $this->questionnaires->removeElement($questionnaire);
+            $questionnaire->removeUser($this);
+        }
+
+        return $this;
+    }
+
 }

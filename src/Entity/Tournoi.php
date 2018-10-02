@@ -38,9 +38,15 @@ class Tournoi
      */
     private $participers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Question", inversedBy="tournois")
+     */
+    private $questions;
+
     public function __construct()
     {
         $this->participers = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,6 +116,32 @@ class Tournoi
             if ($participer->getTournois() === $this) {
                 $participer->setTournois(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Question[]
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): self
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
         }
 
         return $this;

@@ -34,14 +34,14 @@ class Position
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\QuestionApp", mappedBy="positions")
+     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="position")
      */
-    private $questionApps;
+    private $questions;
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
-        $this->questionApps = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,30 +100,30 @@ class Position
     }
 
     /**
-     * @return Collection|QuestionApp[]
+     * @return Collection|Question[]
      */
-    public function getQuestionApps(): Collection
+    public function getQuestions(): Collection
     {
-        return $this->questionApps;
+        return $this->questions;
     }
 
-    public function addQuestionApp(QuestionApp $questionApp): self
+    public function addQuestion(Question $question): self
     {
-        if (!$this->questionApps->contains($questionApp)) {
-            $this->questionApps[] = $questionApp;
-            $questionApp->setPositions($this);
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->setPosition($this);
         }
 
         return $this;
     }
 
-    public function removeQuestionApp(QuestionApp $questionApp): self
+    public function removeQuestion(Question $question): self
     {
-        if ($this->questionApps->contains($questionApp)) {
-            $this->questionApps->removeElement($questionApp);
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
             // set the owning side to null (unless already changed)
-            if ($questionApp->getPositions() === $this) {
-                $questionApp->setPositions(null);
+            if ($question->getPosition() === $this) {
+                $question->setPosition(null);
             }
         }
 
