@@ -1,31 +1,25 @@
+<title>{% block title %}Inscription{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('build/css/app.css')}}">
+    {% endblock %}     
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{asset('build/css/app.css')}}">   
-        {% endblock %}
-    </head>
-    <body>
+    {% block body %}
+
         <div class="container">
-            {% form_theme form 'bootstrap_4_layout.html.twig' %}
-            {% block body %}
-            <br>
-            <br>
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}            
+                <br>
+                <br>
             <div class="py-5 text-left bg-light">
                 <div class="container">
-                    <h1>Starfoullah</h1>
+                    <h1>Inscription</h1>
                     {{ form_start(form) }}
                     {{ form_widget(form) }}            
                     <button type="submit" class="btn btn-primary ">ok</button>
-                    {{ form_end(form) }}
-                    {% endblock %}
-                    {% block javascripts %}{% endblock %}
+                    {{ form_end(form) }}                        
                 </div>
             </div>
-         </div>
-    </body>
-</html>
+        </div>
+    {% endblock %}
+    {% block javascripts %}{% endblock %}
+
 

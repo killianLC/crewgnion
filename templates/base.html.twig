@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Crewgnion{% endblock %}</title>
+        <link rel="icon" type="image/png" href="{{ asset('images/Crewgnion_logo.png') }}" />
         {% block stylesheets %}
         <link rel="stylesheet" href="{{asset('build/css/app.css')}}">
         <meta charset="utf-8">
@@ -11,9 +12,7 @@
         <link rel="stylesheet" href="theme.css" type="text/css"> 
         {% endblock %}
     </head>
-    <body>
-        
-        
+    <body>        
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
