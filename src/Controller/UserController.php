@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\InscriptionType;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Form\RegistrationType;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserController extends AbstractController
+class UserController extends Controller
 {
     /**
      * @Route("/user", name="user")
@@ -35,7 +36,7 @@ class UserController extends AbstractController
      * @Route("/inscription")
      */
 
-    public function inscription(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
        $user = new User;
        $form = $this->createForm(RegistrationType::class,$user);
@@ -60,8 +61,6 @@ class UserController extends AbstractController
      */
     public function connexion()
     {
-        return $this->render('user/connexion.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        return $this->render('user/connexion.html.twig');
     }
 }
