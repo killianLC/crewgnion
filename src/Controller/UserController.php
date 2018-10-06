@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +34,7 @@ class UserController extends Controller
     }
 
       /**
-     * @Route("/inscription")
+     * @Route("/inscription", name="security_registration")
      */
 
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
@@ -50,14 +51,14 @@ class UserController extends Controller
            $manager->persist($user);
            $manager->flush();
            
-           return $this->redirectToRoute('connexion_login');
+           return $this->redirectToRoute('security_login');
        }
        
        return $this->render('user/inscription.html.twig',['form' => $form->createView()]);
     }
 
       /**
-     * @Route("/connexion", name="connexion_login")
+     * @Route("/connexion", name="security_login")
      */
     public function connexion()
     {
