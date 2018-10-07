@@ -13,7 +13,20 @@
         {% endblock %}
     </head>
     <body>        
-        {% block body %}{% endblock %}
+        {% block body %}
+        <nav class="navbar navbar-dark bg-success">
+            <a href="{{ path('accueil') }}" class="navbar-brand">Crewgnion</a>
+            <ul class="navbar-nav">
+            {% if app.user %}
+            <li class="nav-item">
+                <a href="{{ path('security_logout') }}" class="btn btn-danger">
+                    Déconnexion
+                </a>
+            </li>
+            {% endif %}
+            </ul>
+          </nav>
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

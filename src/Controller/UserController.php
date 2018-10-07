@@ -13,22 +13,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends Controller
 {
-    /**
-     * @Route("/user", name="user")
+      /**
+     * @Route("/bienvenue", name="page_accueil_debut")
      */
     public function index()
     {
         return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
-
-      /**
-     * @Route("/accueil")
-     */
-    public function acc()
-    {
-        return $this->render('user/acc.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
@@ -39,7 +29,7 @@ class UserController extends Controller
 
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
-       $user = new User;
+       $user = new User();
        $form = $this->createForm(RegistrationType::class,$user);
        
        $form->handleRequest($request);
@@ -64,4 +54,10 @@ class UserController extends Controller
     {
         return $this->render('user/connexion.html.twig');
     }
+
+    /**
+     * @Route("/deconnexion", name="security_logout")
+     */
+    public function logout()
+    {}
 }

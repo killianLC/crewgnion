@@ -6,13 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ * fields= {"email"}, message= "L'email que vous avez indiqué est déjà utilisé")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -26,25 +29,25 @@ class User
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * )
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
-     * @Assert\EqualTo(propertyPath="confirm_password", message="Mot de passe différent de la confirmation")
+     * @Assert\EqualTo(propertyPath="confirm_password")
      */
     private $password;
 
     /**
-     * @Assert\EqualTo(propertyPath="password")
+     * @Assert\EqualTo(propertyPath="password", message="Les 2 mots de passe sont différents")
      */
     
     public $confirm_password;
@@ -266,5 +269,7 @@ class User
 
         return $this;
     }
+
+
 
 }
