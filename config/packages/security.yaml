@@ -22,8 +22,10 @@ security:
                 login_path: security_login
                 check_path: security_login
                 
-                default_target_path: /
-                
+                default_target_path: accueil
+            logout:
+                path: security_logout
+                target: page_accueil_debut
                 
             # activate different ways to authenticate
 
