@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<br><br>
+{% for r1 in r1 %}
+<div class="container">sds
+    <div class="row">
+    <div class="col-md-4">
+        <h3 class="color_white">Photo de profil</h3>
+    </div>
+    <div class="col-md-6">
+        <h3 class="color_white">Info Profil :</h3>
+    <table class="table bg-primary">
+        <tbody>
+            
+            <tr>         
+                <label>Pseudo :</label>
+                
+                <th>{{ app.user.username }}</th>
+            </tr>
+            <tr>
+                <th>Email :</th>                
+                <th>{{ app.user.email }}</th>
+            </tr>
+            <tr>
+                <th>Grade :</th>
+                <th>{{ r1.Nom_Grade }} {{ r1.photo }}</th>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}

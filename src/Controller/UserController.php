@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends Controller
 {
       /**
-     * @Route("/bienvenue", name="page_accueil_debut")
+     * @Route("/", name="page_accueil_debut")
      */
     public function index()
     {

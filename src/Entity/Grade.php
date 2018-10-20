@@ -33,6 +33,11 @@ class Grade
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $photo;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -94,6 +99,18 @@ class Grade
                 $user->setGrade(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

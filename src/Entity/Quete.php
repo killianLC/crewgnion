@@ -34,12 +34,12 @@ class Quete
     private $Prix;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="float")
      */
     private $Latitude_Quete;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="float")
      */
     private $Longitude_Quete;
 

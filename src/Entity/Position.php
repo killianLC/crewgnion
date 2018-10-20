@@ -19,12 +19,12 @@ class Position
     private $id;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="float")
      */
     private $Latitude_Position;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="float")
      */
     private $Longitude_Position;
 

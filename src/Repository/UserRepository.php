@@ -47,4 +47,21 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * @return User[] Returns an array of User objects
+     */
+    public function recup_grade($id)
+    {
+        $qb = $this->createQueryBuilder('u')
+        ->innerJoin('u.grade', 'g')
+        ->addSelect('g')
+        ->andWhere('u.id=:id')
+        ->setParameter('id', $id)
+        ->select('g.Nom_Grade', 'g.photo')
+        ->getQuery();
+
+        return $qb->execute();
+    }
+
+
 }

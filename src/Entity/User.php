@@ -79,6 +79,16 @@ class User implements UserInterface
      */
     private $questionnaires;
 
+    /**
+     * @ORM\Column(type="bigint", nullable=true)
+     */
+    private $xp;
+
+    /**
+     * @ORM\Column(type="bigint", nullable=true)
+     */
+    private $coin;
+
 
     public function __construct()
     {
@@ -266,6 +276,30 @@ class User implements UserInterface
             $this->questionnaires->removeElement($questionnaire);
             $questionnaire->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getXp(): ?int
+    {
+        return $this->xp;
+    }
+
+    public function setXp(?int $xp): self
+    {
+        $this->xp = $xp;
+
+        return $this;
+    }
+
+    public function getCoin(): ?int
+    {
+        return $this->coin;
+    }
+
+    public function setCoin(?int $coin): self
+    {
+        $this->coin = $coin;
 
         return $this;
     }
