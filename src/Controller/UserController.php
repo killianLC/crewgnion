@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationType;
+use App\Entity\Grade;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends Controller
@@ -31,12 +32,17 @@ class UserController extends Controller
     {
        $user = new User();
        $form = $this->createForm(RegistrationType::class,$user);
+
+       $r1 = $this->getDoctrine()->getRepository(Grade::class)->find(1);
        
        $form->handleRequest($request);
        
        if($form->isSubmitted()&& $form->isValid())
        {
            $hash = $encoder->encodePassword($user, $user->getPassword());
+           $user->setCoin(0);
+           $user->setXp(0);
+           $user->setGrade($r1);
            $user->setPassword($hash);
            $manager->persist($user);
            $manager->flush();

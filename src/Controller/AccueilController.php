@@ -33,10 +33,9 @@ class AccueilController extends AbstractController
     /**
      * @Route("/profil/{id}", name="profil_user")
      */
-     sds
     public function profil($id)
     {
-        $r1 = $this->getDoctrine()->getRepository(User::class)->recup_grade($id);       
+        $r1 = $this->getDoctrine()->getRepository(User::class)->find($id);       
         
         return $this->render('accueil/profil.html.twig', array('r1'=>$r1));
     }

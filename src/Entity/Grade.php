@@ -34,9 +34,10 @@ class Grade
     private $users;
 
     /**
-     * @ORM\Column(type="blob", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $photo;
+
 
     public function __construct()
     {
@@ -103,15 +104,16 @@ class Grade
         return $this;
     }
 
-    public function getPhoto()
+    public function getPhoto(): ?string
     {
         return $this->photo;
     }
 
-    public function setPhoto($photo): self
+    public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
 
         return $this;
     }
+
 }
