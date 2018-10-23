@@ -39,4 +39,15 @@ class AccueilController extends AbstractController
         
         return $this->render('accueil/profil.html.twig', array('r1'=>$r1));
     }
+
+    /**
+     * @Route("/grade/{id}", name="grade_user")
+     */
+    public function grade($id)
+    {
+        $r1 = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $r2 = $this->getDoctrine()->getRepository(Grade::class)->findAll();
+        
+        return $this->render('accueil/grade.html.twig', array('r1'=>$r1, 'r2'=>$r2));
+    }
 }

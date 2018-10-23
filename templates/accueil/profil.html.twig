@@ -4,17 +4,28 @@
 
 <div class="container mx-auto">
     <div class="row">        
-        <span class="col-xs-12 col-sm6 col-md-6 mt-5 mx-auto bg-dark border border-primary rounded">
-                <p class="color_white ml-5 mt-1 mb-4 ">
+        <span class=" color_white col-xs-12 col-sm6 col-md-6 mt-5 mx-auto bg-dark border border-primary rounded">
+            <p class="ml-5 mt-1 mb-4 ">
                 <h4>Profil :</h4>
-                <i class="ml-5">Nom d'utilisateur : {{ r1.username }}</i>   
-                <br/>        
-                <i class="fas fa-envelope"></i> Email : {{ r1.email }}
-                <br/>
-                <i class=""></i>Grade : {{ r1.getGrade().getNomGrade() }} <img src="{{ asset('images/grade/'~r1.getGrade().getPhoto()) }}">
-                <br/>
-                <i class=""></i>June 02, 1988</p>
-                <button type="button" class="btn btn-warning mb-4 mx-auto"><i class="fas fa-edit"></i> Modifier</button>
+                <div class="text-center mx-auto">
+                    <i class="fas fa-user"></i>  Nom d'utilisateur : {{ r1.username }}  
+                </div>    
+                <div class="text-center mx-auto ">
+                    <i class="fas fa-envelope"></i> Email : {{ r1.email }}
+                </div>
+                <div class="text-center mx-auto">
+                    <i class="{{ r1.getGrade().getPhoto() }}"></i> Grade : {{ r1.getGrade().getNomGrade() }} 
+                </div>
+                <div class="text-center mx-auto">
+                    <i class="fas fa-coins"></i> CrewgnionCoin : {{ r1.getCoin() }} 
+                </div>
+                <div class="text-center mx-auto">
+                    <i class="fas fa-trophy"></i> Experience : {{ r1.getXp() }}
+                </div>
+                <div class="mt-3">
+                    <button type="button" class="btn btn-warning mb-4 ml-2"><i class="fas fa-edit"></i> Modifier</button>
+                    <button type="button" class="btn btn-danger mb-4 mr-2 pull-right"><i class="fas fa-times"></i> Supprimer</button>
+                </div>
             </span>
         </div>
         
