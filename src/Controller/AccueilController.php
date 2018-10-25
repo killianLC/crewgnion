@@ -49,7 +49,7 @@ class AccueilController extends AbstractController
                 $r2 = $this->getDoctrine()->getRepository(Grade::class)->findAll();
                 
                 $xp = $r1->getXp();
-                $ptgrade = $r1->getGrade()->getPointGrade();
+                $ptgrade = $r1->getGrade()->getPointMax();
                 
                 $progresscalcul = ($xp/$ptgrade) * 100;
                                 
@@ -61,16 +61,19 @@ class AccueilController extends AbstractController
             */
             public function gradeUp($id)
             {
+                /*
                 $r1 = $this->getDoctrine()->getRepository(User::class)->find($id);
                 $r2 = $this->getDoctrine()->getRepository(Grade::class)->findAll();
                 
                 $xp = $r1->getXp();
-                $ptgrade = $r1->getGrade()->getPointGrade();
+                $ptgrade = $r1->getGrade()->getPointMax();
+                
                 
                 $progresscalcul = ($xp/$ptgrade) * 100;
 
                 //return $this->redirectToRoute('grade_user');
                                 
                 return $this->render('accueil/grade.html.twig', array('r1'=>$r1, 'r2'=>$r2 , 'progressbar' => $progresscalcul));
+                */
             }
         }

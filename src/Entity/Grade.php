@@ -24,11 +24,6 @@ class Grade
     private $Nom_Grade;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $Point_Grade;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="grade")
      */
     private $users;
@@ -37,6 +32,16 @@ class Grade
      * @ORM\Column(type="string", length=255)
      */
     private $photo;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $pointMax;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $pointMin;
 
 
     public function __construct()
@@ -57,18 +62,6 @@ class Grade
     public function setNomGrade(string $Nom_Grade): self
     {
         $this->Nom_Grade = $Nom_Grade;
-
-        return $this;
-    }
-
-    public function getPointGrade(): ?int
-    {
-        return $this->Point_Grade;
-    }
-
-    public function setPointGrade(int $Point_Grade): self
-    {
-        $this->Point_Grade = $Point_Grade;
 
         return $this;
     }
@@ -112,6 +105,30 @@ class Grade
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getPointMax(): ?int
+    {
+        return $this->pointMax;
+    }
+
+    public function setPointMax(int $pointMax): self
+    {
+        $this->pointMax = $pointMax;
+
+        return $this;
+    }
+
+    public function getPointMin(): ?int
+    {
+        return $this->pointMin;
+    }
+
+    public function setPointMin(int $pointMin): self
+    {
+        $this->pointMin = $pointMin;
 
         return $this;
     }
