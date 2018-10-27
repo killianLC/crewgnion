@@ -13,10 +13,21 @@
         <h3>Votre grade actuel est : <i class="{{ r1.getGrade().getPhoto() }}"></i> {{ r1.getGrade().getNomGrade() }}</h3>
     </div>
     {% if r1.getXp() > r1.getGrade().getPointMax() %}   
-    <div class="text-center mt-3">
-        <a href=" /gradeUp/{{app.user.id}}" class="btn btn-primary mt-1">
-            <i class="fas fa-arrow-up"></i> Level Up ! 
-        </a>
+    <div class="mt-3 text-center">
+            <button class="btn btn-primary mt-1 mx-auto" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <i class="fas fa-arrow-up"></i> Passage de niveau disponible
+                </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body col-md-5 mt-4 mx-auto">
+                        Appuyer sur le bouton pour passer au niveau supérieur.
+                        <div>
+                        <a href=" /gradeUp/{{app.user.id}}" class="btn btn-success btn-sm mt-3">
+                            <i class="fas fa-arrow-up"></i> Level Up ! 
+                        </a>
+                        </div>
+                    </div>
+                    
+                </div>
     </div>
     {% endif %}
 </div>
@@ -42,11 +53,11 @@
                 </tr>
                 {% else %}
                 <tr>
-                        <th scope="row">{{ r2.id }}</th>
-                        <td>{{ r2.NomGrade }}</td>
-                        <td><i class="{{ r2.Photo }}"></i></td>
-                        <td>{{ r2.PointMin }} à {{ r2.PointMax }}</td>
-                    </tr>
+                    <th scope="row">{{ r2.id }}</th>
+                    <td>{{ r2.NomGrade }}</td>
+                    <td><i class="{{ r2.Photo }}"></i></td>
+                    <td>{{ r2.PointMin }} à {{ r2.PointMax }}</td>
+                </tr>
                 {% endif %}                
                 {% endfor %}
             </tbody>

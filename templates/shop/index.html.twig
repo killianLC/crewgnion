@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shop{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h2 class="text-center color_white mt-5">Bienvenue sur la boutique du Crewgnion !</h2>
+    <div class="border-top border-primary mt-2 mx-auto">
+    </div>
+    <div class="text-center">
+        <div class="btn-group mt-2">
+            <a href="/boutique/{{app.user.id}}" class="btn btn-primary">
+                <i class="fas fa-cart-arrow-down"></i> Article non possédé
+            </a>
+            <a href="/inventaire/{{app.user.id}}" class="btn btn-secondary">
+                <i class="fas fa-clipboard-check"></i> Article déjà possédé
+            </a>
+        </div>
+    </div>    
+</div>
+    <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" id="list-possede-list" data-toggle="list" href="#list-possede" role="tab" aria-controls="home">Home</a>
+        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+    </div>
+    <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-possede" role="tabpanel" aria-labelledby="list-possede-list">...</div>
+            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">testtesttessetste</div>
+
+        </div>
+    </ul>
+
+{% endblock %}
