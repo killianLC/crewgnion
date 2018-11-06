@@ -23,8 +23,27 @@
                     <i class="fas fa-trophy"></i> Experience : {{ r1.getXp() }}
                 </div>
                 <div class="mt-3">
-                    <button type="button" class="btn btn-warning mb-4 ml-2"><i class="fas fa-edit"></i> Modifier</button>
-                    <button type="button" class="btn btn-danger mb-4 mr-2 pull-right"><i class="fas fa-times"></i> Supprimer</button>
+                    <a href="/user/update/{{app.user.id}}" class="btn btn-warning mb-4 ml-2"><i class="fas fa-edit"></i> Modifier</a>
+                    <button type="button" class="btn btn-danger mb-4 mr-2 pull-right" data-toggle="modal" data-target="#modaldelete">
+                        Supprimer
+                    </button>
+                    <div class="modal fade" id="modaldelete" tabindex="-1" role="dialog" aria-labelledby="modaldeletelabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title color_grey" id="modaldeletelabel">Supprimer ?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body color_grey">
+                                    <p>Etes vous sure de vouloir supprimez votre compte</p>
+                                    <a href="/user/delete/{{app.user.id}}" class="btn btn-danger mr-2 pull-right"><i class="fas fa-times"></i> Supprimer</a>
+                                </div>                         
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </span>
         </div>

@@ -31,19 +31,20 @@ class GradeController extends AbstractController
     */
     public function gradeUp($id)
     {
-        /*
-        $r1 = $this->getDoctrine()->getRepository(User::class)->find($id);
-        $r2 = $this->getDoctrine()->getRepository(Grade::class)->findAll();
+        $manager = $this->getDoctrine()->getManager();
         
-        $xp = $r1->getXp();
-        $ptgrade = $r1->getGrade()->getPointMax();
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+
+        $grade = $user->getGrade()->getId();
+
+        $r1 = $this->getDoctrine()->getRepository(Grade::class)->find($grade+1);       
         
+        $user->setGrade($r1);
+
+        $manager->persist($user);
+        $manager->flush();
+
+        return $this->redirectToRoute('grade_user', array('id' => $id));
         
-        $progresscalcul = ($xp/$ptgrade) * 100;
-        
-        //return $this->redirectToRoute('grade_user');
-        
-        return $this->render('accueil/grade.html.twig', array('r1'=>$r1, 'r2'=>$r2 , 'progressbar' => $progresscalcul));
-        */
     }
 }
