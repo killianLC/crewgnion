@@ -102,7 +102,7 @@ final class Versions
   'symfony/profiler-pack' => 'v1.0.3@fa2e2dad522a3bef322196abad28ffce6d0fdbc5',
   'symfony/stopwatch' => 'v4.1.4@966c982df3cca41324253dc0c7ffe76b6076b705',
   'symfony/test-pack' => 'v1.0.2@958d23627214f5268d211c25031650d0dd6bdf60',
-  'symfony/var-dumper' => 'v4.1.4@a05426e27294bba7b0226ffc17dd01a3c6ef9777',
+  'symfony/var-dumper' => 'v4.1.6@60319b45653580b0cdacca499344577d87732f16',
   'symfony/web-profiler-bundle' => 'v4.1.4@085fe3d8b7841b156cc1dc5aa7df9bdc81316edb',
   'symfony/web-server-bundle' => 'v4.1.4@448d4437e95d0884856a1e83bc51a15b5d048060',
   'paragonie/random_compat' => '*@',

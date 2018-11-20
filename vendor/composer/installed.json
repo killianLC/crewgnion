@@ -5360,17 +5360,17 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v4.1.4",
-        "version_normalized": "4.1.4.0",
+        "version": "v4.1.6",
+        "version_normalized": "4.1.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",
-            "reference": "a05426e27294bba7b0226ffc17dd01a3c6ef9777"
+            "reference": "60319b45653580b0cdacca499344577d87732f16"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/a05426e27294bba7b0226ffc17dd01a3c6ef9777",
-            "reference": "a05426e27294bba7b0226ffc17dd01a3c6ef9777",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/60319b45653580b0cdacca499344577d87732f16",
+            "reference": "60319b45653580b0cdacca499344577d87732f16",
             "shasum": ""
         },
         "require": {
@@ -5392,7 +5392,7 @@
             "ext-intl": "To show region name in time zone dump",
             "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
         },
-        "time": "2018-08-02T09:24:26+00:00",
+        "time": "2018-10-02T16:36:10+00:00",
         "bin": [
             "Resources/bin/var-dump-server"
         ],

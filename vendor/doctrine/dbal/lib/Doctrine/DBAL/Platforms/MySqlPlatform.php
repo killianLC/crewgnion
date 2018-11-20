@@ -1150,4 +1150,10 @@ class MySqlPlatform extends AbstractPlatform
     {
         return TransactionIsolationLevel::REPEATABLE_READ;
     }
+    // Méthode ajouter
+    public function getDistanceExpression($stringLatitude1, $stringLatitude2,$stringLatitude11,$stringLatitude22,$stringLongitude1,$stringLongitude2)
+    {
+        return '(ACOS(SIN('.$stringLatitude2.' * PI() / 180) * SIN('.$stringLatitude1.' * PI() / 180) + COS('.$stringLatitude22.' * PI() / 180) * COS('.$stringLatitude11.' * PI() /   180) * COS(( '.$stringLongitude2.'- '.$stringLongitude1.') * PI() / 180)) * 180 / PI() * 60 * 1.1515 * 1.609344)';
+    }
+
 }
