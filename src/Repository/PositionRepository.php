@@ -47,4 +47,21 @@ class PositionRepository extends ServiceEntityRepository
         ;
     }
     */
+    /** 
+     * @return Position[] Returns an array of Position objects
+     */
+    public function findAllPositionAutourPosition($latitude,$longitude): array
+    {
+        
+       $qb = $this->createQueryBuilder('p')
+            ->andWhere('distance(p.latitude,:latitude,p.latitude,:latitude,p.longitude,:longitude ) < 1000' )
+            ->orderBy('distance(p.latitude,:latitude,p.latitude,:latitude,p.longitude,:longitude )', 'ASC')
+            ->setParameter('latitude', $latitude)
+            ->setParameter('longitude', $longitude)
+            ->addselect('distance(p.latitude,:latitude,p.latitude,:latitude,p.longitude,:longitude )AS gps')
+            ->getQuery();
+
+        return $qb->execute();
+    }
+
 }

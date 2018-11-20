@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="progress mt-5">
-        <div class="progress-bar progress-bar-striped progress-bar-animated font-weight-bold" role="progressbar" aria-valuenow="{{ r1.getXp() }}" aria-valuemin="0" aria-valuemax="{{ r1.getGrade().getPointMax() }}" style="width: {{ progressbar }}%">{{ r1.getXp() }}/{{ r1.getGrade().getPointMax() }} Xp </div>
+        <div class="progress-bar progress-bar-striped progress-bar-animated font-weight-bold color_grey" role="progressbar" aria-valuenow="{{ r1.getXp() }}" aria-valuemin="0" aria-valuemax="{{ r1.getGrade().getPointMax() }}" style="width: {{ progressbar }}%">{{ r1.getXp() }}/{{ r1.getGrade().getPointMax() }} Xp </div>
     </div>
     <br/>
     <div class="text-center color_white">
@@ -40,16 +40,18 @@
                     <th scope="col">Nom du grade</th>
                     <th scope="col">Badge</th>
                     <th scope="col">Point Min/Point Max</th>
+                    <th scope="col">Liste des joueurs</th>
                 </tr>
             </thead>
             <tbody>
                 {% for r2 in r2 %}
                 {% if r2.id == r1.getGrade().getId() %}
                 <tr class="bg-primary">
-                    <th scope="row">{{ r2.id }}</th>
+                    <th class="color_white" scope="row">{{ r2.id }}</a></th>
                     <td>{{ r2.NomGrade }}</td>
                     <td><i class="{{ r2.Photo }}"></i></td>
                     <td>{{ r2.PointMin }} à {{ r2.PointMax }}</td>
+                    <td><a class="btn btn-warning fas fa-align-justify " href="/grade_in/{{ r2.getId() }}"></a></td>
                 </tr>
                 {% else %}
                 <tr>
@@ -57,6 +59,7 @@
                     <td>{{ r2.NomGrade }}</td>
                     <td><i class="{{ r2.Photo }}"></i></td>
                     <td>{{ r2.PointMin }} à {{ r2.PointMax }}</td>
+                    <td><a class="btn btn-warning fas fa-align-justify" href="/grade_in/{{ r2.getId() }}"></a></td>
                 </tr>
                 {% endif %}                
                 {% endfor %}

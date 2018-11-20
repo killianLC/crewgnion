@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maps{% endblock %}                                            
+
+{% block body %}                                            
+<div id="map" class="mt-5"></div>
+<script>
+    
+    function initMap() {
+        
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: {lat: 48.2532444, lng: -2.6152263}
+        });
+        
+        
+        var markers = locations.map(function(location, i) {
+            return new google.maps.Marker({
+                position: location,
+            });
+        });
+        
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    }
+    
+    var locations = [ 
+    {% for position in positions %}
+    { 
+        lat: {{ position.LatitudePosition }}, 
+        lng: {{ position.LongitudePosition }} 
+    },
+    {% endfor %} ]
+    
+</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGqu93anG2RuN7R9imKXX9f7OwDsNewh0&callback=initMap">
+</script>
+{% endblock %}

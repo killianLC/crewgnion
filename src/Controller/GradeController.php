@@ -47,4 +47,16 @@ class GradeController extends AbstractController
         return $this->redirectToRoute('grade_user', array('id' => $id));
         
     }
+
+    /**
+     * @Route("/grade_in/{id}", name="gradeIn")
+     */
+    public function gradeIn($id)
+    {
+        $grade = $this->getDoctrine()->getRepository(Grade::class)->find($id);
+
+        $users = $grade->getUsers();
+
+        return $this->render('grade/grade_in.html.twig', array('users'=>$users, 'grade'=>$grade));
+    }
 }

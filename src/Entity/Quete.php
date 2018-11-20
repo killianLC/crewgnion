@@ -99,24 +99,24 @@ class Quete
         return $this;
     }
 
-    public function getLatitudeQuete(): ?int
+    public function getLatitudeQuete(): ?float
     {
         return $this->Latitude_Quete;
     }
 
-    public function setLatitudeQuete(int $Latitude_Quete): self
+    public function setLatitudeQuete(float $Latitude_Quete): self
     {
         $this->Latitude_Quete = $Latitude_Quete;
 
         return $this;
     }
 
-    public function getLongitudeQuete(): ?int
+    public function getLongitudeQuete(): ?float
     {
         return $this->Longitude_Quete;
     }
 
-    public function setLongitudeQuete(int $Longitude_Quete): self
+    public function setLongitudeQuete(float $Longitude_Quete): self
     {
         $this->Longitude_Quete = $Longitude_Quete;
 
