@@ -36,8 +36,10 @@ class AccueilController extends AbstractController
             public function profil($id)
             {
                 $r1 = $this->getDoctrine()->getRepository(User::class)->find($id);       
+
+                $quetes = $r1->getQuetes();
                 
-                return $this->render('accueil/profil.html.twig', array('r1'=>$r1));
+                return $this->render('accueil/profil.html.twig', array('r1'=>$r1, 'quetes'=>$quetes));
             }
             
             

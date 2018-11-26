@@ -13,25 +13,41 @@
             center: {lat: 48.2532444, lng: -2.6152263}
         });
         
+        var imageO = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        var markers = locationsO.map(function(location, i) {
+            return new google.maps.Marker({
+                position: location,
+                icon: imageO
+            });
+        });
+        var locationsO = [ 
+        {% for position in positions1 %}
+        { 
+            lat: {{ position.LatitudePosition }}, 
+            lng: {{ position.LongitudePosition }} 
+        }
+        {% endfor %},
+        ]
         
-        var markers = locations.map(function(location, i) {
+        var markers = locationsN.map(function(location, i) {
             return new google.maps.Marker({
                 position: location,
             });
         });
+        var locationsN = [ 
+        {% for position in positions2 %}
+        { 
+            lat: {{ position.LatitudePosition }}, 
+            lng: {{ position.LongitudePosition }} 
+        }
+        {% endfor %},
+        ]
         
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
     
-    var locations = [ 
-    {% for position in positions %}
-    { 
-        lat: {{ position.LatitudePosition }}, 
-        lng: {{ position.LongitudePosition }} 
-    },
-    {% endfor %} ]
     
 </script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">

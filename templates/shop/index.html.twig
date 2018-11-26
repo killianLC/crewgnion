@@ -8,24 +8,27 @@
     <h2 class="text-center color_white mt-5">Bienvenue sur la boutique du Crewgnion !</h2>
     <div class="border-top border-primary mt-2 mx-auto">
     </div>
-    <div id="boutique"></div>
-    <div class="text-center">
-        <div class="btn-group mt-2">
-            <button class="btn btn-primary" data-toggle="collapse" data-parent="#boutique" data-target="#collboutique" aria-expanded="false" aria-controls="collboutique">
-                <i class="fas fa-cart-arrow-down"></i> Article non possédé
-            </button>
-            <button class="btn btn-secondary" data-toggle="collapsed" data-parent="#boutique" data-target="#collinventaire" aria-expanded="false" aria-controls="collinventaire">
-                <i class="fas fa-clipboard-check"></i> Article déjà possédé
-            </button>
-        </div>
-    </div>  
-
-<div class="collapse" id="collboutique">
-    hfgdfgfh
-</div>
-<div class="collapse" id="collinventaire">
-fddfs
-</div>
+        <div class="table-responsive-md mt-3">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Acheter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quete in quetes %}
+                    <tr>
+                        <th class="color_white" scope="row">{{ quete.getDescriptifQuete() }}</a></th>
+                        <td>{{ quete.getPrix() }} CC</td>
+                        <td><a class="btn btn-success fas fa-plus-square" href="/shop/buy/{{ app.user.id }}/{{ quete.getId() }}"></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    
 </div>
 
 
