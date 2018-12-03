@@ -63,5 +63,15 @@ class UserRepository extends ServiceEntityRepository
         return $qb->execute();
     }
 
+    public function findlog($username){
+        $qb = $this->createQueryBuilder('u')
+        ->where('u.username=:username')
+        ->setParameter('username', $username)
+        ->select('u.username', 'u.id', 'u.password')
+        ->getQuery();
+        
+        return $qb->execute();
+    }
+
 
 }
