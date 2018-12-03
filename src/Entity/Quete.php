@@ -21,41 +21,47 @@ class Quete
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Descriptif_Quete;
+    private $descriptif;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $Point_Gagne;
+    private $xp;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $Prix;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $Latitude_Quete;
+    private $prix;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $Longitude_Quete;
+    private $latitude;
 
     /**
-     * @ORM\Column(type="bigint", nullable=true)
+     * @ORM\Column(type="float")
      */
-    private $Rayon_Activation_Quete;
+    private $longitude;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="quetes")
+     * @ORM\OneToMany(targetEntity="App\Entity\Resoudre", mappedBy="quete")
      */
-    private $users;
+    private $resoudres;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Acquerir", mappedBy="quete")
+     */
+    private $acquerirs;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->resoudres = new ArrayCollection();
+        $this->acquerirs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,100 +69,136 @@ class Quete
         return $this->id;
     }
 
-    public function getDescriptifQuete(): ?string
+    public function getDescriptif(): ?string
     {
-        return $this->Descriptif_Quete;
+        return $this->descriptif;
     }
 
-    public function setDescriptifQuete(string $Descriptif_Quete): self
+    public function setDescriptif(string $descriptif): self
     {
-        $this->Descriptif_Quete = $Descriptif_Quete;
+        $this->descriptif = $descriptif;
 
         return $this;
     }
 
-    public function getPointGagne(): ?int
+    public function getXp(): ?int
     {
-        return $this->Point_Gagne;
+        return $this->xp;
     }
 
-    public function setPointGagne(int $Point_Gagne): self
+    public function setXp(int $xp): self
     {
-        $this->Point_Gagne = $Point_Gagne;
+        $this->xp = $xp;
 
         return $this;
     }
 
     public function getPrix(): ?int
     {
-        return $this->Prix;
+        return $this->prix;
     }
 
-    public function setPrix(?int $Prix): self
+    public function setPrix(int $prix): self
     {
-        $this->Prix = $Prix;
+        $this->prix = $prix;
 
         return $this;
     }
 
-    public function getLatitudeQuete(): ?float
+    public function getLatitude(): ?float
     {
-        return $this->Latitude_Quete;
+        return $this->latitude;
     }
 
-    public function setLatitudeQuete(float $Latitude_Quete): self
+    public function setLatitude(float $latitude): self
     {
-        $this->Latitude_Quete = $Latitude_Quete;
+        $this->latitude = $latitude;
 
         return $this;
     }
 
-    public function getLongitudeQuete(): ?float
+    public function getLongitude(): ?float
     {
-        return $this->Longitude_Quete;
+        return $this->longitude;
     }
 
-    public function setLongitudeQuete(float $Longitude_Quete): self
+    public function setLongitude(float $longitude): self
     {
-        $this->Longitude_Quete = $Longitude_Quete;
-
-        return $this;
-    }
-
-    public function getRayonActivationQuete(): ?int
-    {
-        return $this->Rayon_Activation_Quete;
-    }
-
-    public function setRayonActivationQuete(?int $Rayon_Activation_Quete): self
-    {
-        $this->Rayon_Activation_Quete = $Rayon_Activation_Quete;
+        $this->longitude = $longitude;
 
         return $this;
     }
 
     /**
-     * @return Collection|User[]
+     * @return Collection|Resoudre[]
      */
-    public function getUsers(): Collection
+    public function getResoudres(): Collection
     {
-        return $this->users;
+        return $this->resoudres;
     }
 
-    public function addUser(User $user): self
+    public function addResoudre(Resoudre $resoudre): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
+        if (!$this->resoudres->contains($resoudre)) {
+            $this->resoudres[] = $resoudre;
+            $resoudre->setQuete($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeResoudre(Resoudre $resoudre): self
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
+        if ($this->resoudres->contains($resoudre)) {
+            $this->resoudres->removeElement($resoudre);
+            // set the owning side to null (unless already changed)
+            if ($resoudre->getQuete() === $this) {
+                $resoudre->setQuete(null);
+            }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Acquerir[]
+     */
+    public function getAcquerirs(): Collection
+    {
+        return $this->acquerirs;
+    }
+
+    public function addAcquerir(Acquerir $acquerir): self
+    {
+        if (!$this->acquerirs->contains($acquerir)) {
+            $this->acquerirs[] = $acquerir;
+            $acquerir->setQuete($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAcquerir(Acquerir $acquerir): self
+    {
+        if ($this->acquerirs->contains($acquerir)) {
+            $this->acquerirs->removeElement($acquerir);
+            // set the owning side to null (unless already changed)
+            if ($acquerir->getQuete() === $this) {
+                $acquerir->setQuete(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
 
         return $this;
     }

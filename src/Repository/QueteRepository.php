@@ -47,4 +47,25 @@ class QueteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return Quete[] Returns an array of Quete objects
+     */
+    public function QueteNonAcheter($id_user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+        SELECT q.id, q.nom, q.latitude, q.longitude, q.xp, q.prix
+        FROM App\Entity\Quete q
+        WHERE q.id NOT IN (
+            SELECT quete.id
+            FROM App\Entity\Quete quete, App\Entity\User user, App\Entity\Acquerir acquerir
+            WHERE quete.id = acquerir.quete
+            AND user.id = acquerir.user
+            AND user.id = :id
+        )')
+        ->setParameter('id', $id_user);
+
+        return $query->execute();
+    }
 }

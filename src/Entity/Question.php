@@ -50,14 +50,14 @@ class Question
     private $questionnaires;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Position", inversedBy="questions")
-     */
-    private $position;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tournoi", mappedBy="questions")
      */
     private $tournois;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Position", inversedBy="questions")
+     */
+    private $position;
 
     public function __construct()
     {
@@ -161,18 +161,6 @@ class Question
         return $this;
     }
 
-    public function getPosition(): ?Position
-    {
-        return $this->position;
-    }
-
-    public function setPosition(?Position $position): self
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Tournoi[]
      */
@@ -197,6 +185,18 @@ class Question
             $this->tournois->removeElement($tournois);
             $tournois->removeQuestion($this);
         }
+
+        return $this;
+    }
+
+    public function getPosition(): ?Position
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?Position $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }

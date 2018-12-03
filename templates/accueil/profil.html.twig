@@ -31,7 +31,12 @@
                 </div>
             </span>
         </div>        
+    </div>    
+    {% if quetes is empty %}
+    <div class="collapse alert alert-danger mt-4" role="alert" id="collInventaire">
+        Vous n'avez aucune Quête en votre possession. Rendez vous <a href="/shop/boutique/{{app.user.id}}"><strong>ici</strong></a> pour en acheter.
     </div>
+    {% else %}    
     <div class="collapse mt-4" id="collInventaire">
         <div class="">
             <table class="table table-dark">
@@ -44,14 +49,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {% for quete in quetes %}
                     <tr>
-                        <th scope="row">{{ quete.getDescriptifQuete() }}</th>
-                        <td>{{ quete.getPointGagne() }} CC</td>
+                        <th scope="row">{{ quete.getNom() }}</th>
+                        <td>{{ quete.getXp() }} CC</td>
                         <td>{{ quete.getPrix() }} CC</td>
-                        <td><a class="btn btn-warning fas fa-map-marked-alt" href="/queteMap/{{ quete.getId() }}"></a></td>
+                        <td><a class="btn btn-warning fas fa-map-marked-alt" href="/maps/mapsQ/{{ quete.getId() }}"></a></td>
                     </tr>
                     {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>

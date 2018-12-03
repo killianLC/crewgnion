@@ -3,81 +3,51 @@
 {% block title %}Maps{% endblock %}                                            
 
 {% block body %}
-<div class="border-top border-primary mt-2 mx-auto"></div>  
-<div class="color_white mt-2">
-  <h5>Positions Validées : <span class="badge badge-success">{{ nbPositionsF }}</span></h5>
-  <h5>Positions toujours pas validées : <span class="badge badge-danger">{{ nbPositionsNF }}</span></h5>
-</div>
-<div class="border-top border-primary mt-2 mx-auto"></div>                             
-<div id="map" class="mt-2"></div>
-<div class="mt-3">
-  <div class="row">
-    {% for positionNF in positionsNF %}
-    <span class="col-xs-9 col-sm-5 col-md-2 mb-2 mx-auto bg-dark border border-primary rounded color_white">
-      
-      <div class="mt-2 mb-2">
-        <h5 class="text-center">{{ positionNF.id }} - <span class="mr-2 badge badge-danger">Non Validé</span></h5> 
-      </div>
-      
+<div class="row">
+  <div id="map" class="mt-5"></div>
+  <div class="container col-xs-5 col-sm-3 col-md-2">Légende :
+
+  </div>
+</div> 
+<div class="container mt-3">
+  <div class="row color_white">
+    <span class="col-xs-11 col-sm-6 col-md-5 mb-2 mx-auto bg-dark border border-primary rounded color_white">
+      <h2 class="mx-auto text-center">Distance : test km</h2>
     </span>
-    {% endfor %}
-    {% for positionF in positionsF %}
-    <span class="col-xs-9 col-sm-5 col-md-2 mb-2 mx-auto bg-dark border border-primary rounded color_white">
-      
-      <div class="mt-2 mb-2">
-        <h5 class="text-center">{{ positionF.id }} - <span href="" class="badge badge-success">Validé !</span></h5> 
-      </div>      
-      
+    <span class="col-xs-11 col-sm-6 col-md-5 mb-2 mx-auto bg-dark border border-primary rounded color_white">
+      <h2 class="mx-auto text-center">Récompense : {{ position.getXp() }} Xp</h2>
     </span>
-    {% endfor %}
   </div>
 </div>
 <script>
-  
+  // Note: This example requires that you consent to location sharing when
+  // prompted by your browser. If you see the error "The Geolocation service
+  // failed.", it means you probably did not give permission for the browser to
+  // locate you.
+  var map, infoWindow;
   function initMap() {
-    
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 6,
+    map = new google.maps.Map(document.getElementById('map'), {          
+      zoom: 8,
     });
     infoWindow = new google.maps.InfoWindow;
     
-    pointF = {
+    var point = {
       path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
-      fillColor: '#28a745',
+      fillColor: '#007bff',
       fillOpacity: 1,
       scale: 1,
       strokeColor: '',
       strokeWeight: 0
     };
     
-    pointNF = {
-      path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
-      fillColor: '#dc3545',
-      fillOpacity: 1,
-      scale: 1,
-      strokeColor: '',
-      strokeWeight: 0
-    };
-    
-    {% for positionF in positionsF %}
-    markerF = new google.maps.Marker({
+    marker = new google.maps.Marker({
       map: map,
-      icon : pointF,
-      position: new google.maps.LatLng({{ positionF.latitude }},{{ positionF.longitude }}),
+      icon : point,
       animation: google.maps.Animation.DROP,
-      labelContent: {{ positionF.id }}
-    });
-    {% endfor %} 
+      position: {lat: {{ position.getLatitude }}, lng: {{ position.getLongitude }}}
+    });        
     
-    {% for positionNF in positionsNF %}
-    markerNF = new google.maps.Marker({
-      map: map,
-      icon : pointNF,
-      position: new google.maps.LatLng({{ positionNF.latitude }},{{ positionNF.longitude }}),
-      animation: google.maps.Animation.DROP
-    });
-    {% endfor %} 
-    
+    // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
@@ -89,12 +59,12 @@
             'Vous êtes ici !'+
             '</div>'
           });
-          marker = new google.maps.Marker({
+          var marker = new google.maps.Marker({
             position: pos,
             map: map,
             icon: {
               path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
-              fillColor: '#007bff',
+              fillColor: '#dc3545',
               fillOpacity: 1,
               scale: 1,
               strokeColor: '',
@@ -132,11 +102,9 @@
         marker.setAnimation(google.maps.Animation.BOUNCE);
       }
     }
-    
-  </script>
-  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
   </script>
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGqu93anG2RuN7R9imKXX9f7OwDsNewh0&callback=initMap">
-</script>
+</script>                                          
+
 {% endblock %}

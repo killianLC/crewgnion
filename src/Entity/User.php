@@ -53,16 +53,9 @@ class User implements UserInterface
     public $confirm_password;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Quete", mappedBy="users")
-     */
-    private $quetes;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Grade", inversedBy="users")
      */
-    private $grade;
-
-    
+    private $grade;   
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Participer", mappedBy="users")
@@ -89,13 +82,30 @@ class User implements UserInterface
      */
     private $coin;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Accomplir", mappedBy="users")
+     */
+    private $accomplirs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Resoudre", mappedBy="user")
+     */
+    private $resoudres;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Acquerir", mappedBy="user")
+     */
+    private $acquerirs;
+
 
     public function __construct()
     {
-        $this->quetes = new ArrayCollection();
         $this->participers = new ArrayCollection();
         $this->positions = new ArrayCollection();
         $this->questionnaires = new ArrayCollection();
+        $this->accomplirs = new ArrayCollection();
+        $this->resoudres = new ArrayCollection();
+        $this->acquerirs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,34 +161,6 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
-    }
-
-    /**
-     * @return Collection|Quete[]
-     */
-    public function getQuetes(): Collection
-    {
-        return $this->quetes;
-    }
-
-    public function addQuete(Quete $quete): self
-    {
-        if (!$this->quetes->contains($quete)) {
-            $this->quetes[] = $quete;
-            $quete->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeQuete(Quete $quete): self
-    {
-        if ($this->quetes->contains($quete)) {
-            $this->quetes->removeElement($quete);
-            $quete->removeUser($this);
-        }
-
-        return $this;
     }
 
     public function getGrade(): ?Grade
@@ -300,6 +282,99 @@ class User implements UserInterface
     public function setCoin(?int $coin): self
     {
         $this->coin = $coin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Accomplir[]
+     */
+    public function getAccomplirs(): Collection
+    {
+        return $this->accomplirs;
+    }
+
+    public function addAccomplir(Accomplir $accomplir): self
+    {
+        if (!$this->accomplirs->contains($accomplir)) {
+            $this->accomplirs[] = $accomplir;
+            $accomplir->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccomplir(Accomplir $accomplir): self
+    {
+        if ($this->accomplirs->contains($accomplir)) {
+            $this->accomplirs->removeElement($accomplir);
+            // set the owning side to null (unless already changed)
+            if ($accomplir->getUsers() === $this) {
+                $accomplir->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Resoudre[]
+     */
+    public function getResoudres(): Collection
+    {
+        return $this->resoudres;
+    }
+
+    public function addResoudre(Resoudre $resoudre): self
+    {
+        if (!$this->resoudres->contains($resoudre)) {
+            $this->resoudres[] = $resoudre;
+            $resoudre->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResoudre(Resoudre $resoudre): self
+    {
+        if ($this->resoudres->contains($resoudre)) {
+            $this->resoudres->removeElement($resoudre);
+            // set the owning side to null (unless already changed)
+            if ($resoudre->getUser() === $this) {
+                $resoudre->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Acquerir[]
+     */
+    public function getAcquerirs(): Collection
+    {
+        return $this->acquerirs;
+    }
+
+    public function addAcquerir(Acquerir $acquerir): self
+    {
+        if (!$this->acquerirs->contains($acquerir)) {
+            $this->acquerirs[] = $acquerir;
+            $acquerir->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAcquerir(Acquerir $acquerir): self
+    {
+        if ($this->acquerirs->contains($acquerir)) {
+            $this->acquerirs->removeElement($acquerir);
+            // set the owning side to null (unless already changed)
+            if ($acquerir->getUser() === $this) {
+                $acquerir->setUser(null);
+            }
+        }
 
         return $this;
     }

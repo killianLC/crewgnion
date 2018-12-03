@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Position;
 use App\Entity\User;
+use App\Entity\Quete;
+use App\Entity\Position;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -14,32 +15,42 @@ class MapsController extends AbstractController
     */
     public function index($id)
     {
+        $positionsF = $this->getDoctrine()->getRepository(Position::class)->recupPointF($id);
 
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-
-        dump($user);
-
-        $user_id = $user->getId();
-
-        dump($user_id);
-
-        $positionsN = $this->getDoctrine()->getRepository(Position::class)->recupPointNF($user_id);
-
-        dump($positionsN);die();        
-
-        $positionsO = $user->getPositions();
+        $positionsNF = $this->getDoctrine()->getRepository(Position::class)->recupPointNF($id);
         
-        // dump($positions);die();
-    
+        $nbPositionsF = count($positionsF);
+        $nbPositionsNF = count($positionsNF);
+        
+        dump($nbPositionsNF);dump($nbPositionsF);
         /*
-        $session->set('lat',$lat); 
-        $session->set('long',$long);  
+        $session->set('lat',$lat);
+        $session->set('long',$long);
         $session->set('loc','oui');
-
+        
         $test= $this->getDoctrine()->getRepository(Position::class)->findAllPositionAutourPosition($lat,$long);
         */
-        return $this->render('maps/mapsG.html.twig',array('positions1'=>$positionsO, 'positions2'=>$positionsN));
+        return $this->render('maps/mapsG.html.twig',array('positionsF'=> $positionsF, 'positionsNF' => $positionsNF, 'nbPositionsF'=>$nbPositionsF, 'nbPositionsNF'=>$nbPositionsNF));
     }
-   
-
+    
+    /**
+    * @Route("/maps/mapsQ/{id}", name="mapsI")
+    */
+    public function maps_Individuel($id)
+    {
+        
+        $position = $this->getDoctrine()->getRepository(Quete::class)->find($id);
+        
+        dump($position);
+        
+        /*
+        $session->set('lat',$lat);
+        $session->set('long',$long);
+        $session->set('loc','oui');
+        
+        $test= $this->getDoctrine()->getRepository(Position::class)->findAllPositionAutourPosition($lat,$long);
+        */
+        return $this->render('maps/mapsQ.html.twig',array('position'=>$position));
+    }
+    
 }

@@ -5,28 +5,42 @@
 {% block body %}
 
 <div class="container">
+    {% for flash_message in app.session.flashBag.get('success') %}
+    <div class="alert alert-success mt-5">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+    {% for flash_message in app.session.flashBag.get('warning') %}
+    <div class="alert alert-warning mt-5">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
     <h2 class="text-center color_white mt-5">Bienvenue sur la boutique du Crewgnion !</h2>
     <div class="border-top border-primary mt-2 mx-auto">
     </div>
-        <div class="table-responsive-md mt-3">
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Prix</th>
-                        <th scope="col">Acheter</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for quete in quetes %}
-                    <tr>
-                        <th class="color_white" scope="row">{{ quete.getDescriptifQuete() }}</a></th>
-                        <td>{{ quete.getPrix() }} CC</td>
-                        <td><a class="btn btn-success fas fa-plus-square" href="/shop/buy/{{ app.user.id }}/{{ quete.getId() }}"></a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    <div class="table-responsive-md mt-3">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Acheter</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quete in quetes %}
+                <tr>
+                    <th class="color_white" scope="row">{{ quete.nom }}</a></th>
+                    <td>{{ quete.prix }} CC</td>
+                    {% if quete.prix > user.getCoin() %}
+                    <td><a class="btn btn-success fas fa-plus-square disabled" href=""></a></td>
+                    {% else %}
+                    <td><a class="btn btn-success fas fa-plus-square" href="/shop/buy/{{ app.user.id }}/{{ quete.id }}"></a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
     
 </div>

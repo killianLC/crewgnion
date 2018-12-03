@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Grade;
+use App\Entity\Acquerir;
+use App\Entity\Quete;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,12 +37,23 @@ class AccueilController extends AbstractController
             */
             public function profil($id)
             {
-                $r1 = $this->getDoctrine()->getRepository(User::class)->find($id);       
-
-                $quetes = $r1->getQuetes();
+                $user = $this->getDoctrine()->getRepository(User::class)->find($id);   
                 
-                return $this->render('accueil/profil.html.twig', array('r1'=>$r1, 'quetes'=>$quetes));
+                $acquerirs = $this->getDoctrine()->getRepository(Acquerir::class)->findBy([
+                    'user' => $user,
+                    ]); //recupere les différents objets acquerir de l'utilisateur 
+                    $quetes = [];
+                    
+                    if($acquerirs) // si il y a des objets dans la requete précédente alors 
+                    {
+                        $acquerir = [];                    
+                        foreach($acquerirs as $acquerir) //parcour de la liste acquerirs
+                        {
+                            $quetes[] = $acquerir->getQuete(); //ajout de la quete d'acquerir dans la liste quetes 
+                        }
+                        return $this->render('accueil/profil.html.twig', array('r1'=>$user, 'quetes'=>$quetes));
+                    }
+                    return $this->render('accueil/profil.html.twig', array('r1'=>$user, 'quetes'=>$quetes));
+                }         
+                
             }
-            
-            
-        }

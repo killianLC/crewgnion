@@ -7,116 +7,121 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* @ORM\Entity(repositoryClass="App\Repository\PositionRepository")
-*/
+ * @ORM\Entity(repositoryClass="App\Repository\PositionRepository")
+ */
 class Position
 {
     /**
-    * @ORM\Id()
-    * @ORM\GeneratedValue()
-    * @ORM\Column(type="integer")
-    */
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
     private $id;
-    
+
     /**
-    * @ORM\Column(type="float")
-    */
-    private $Latitude_Position;
-    
+     * @ORM\Column(type="float")
+     */
+    private $latitude;
+
     /**
-    * @ORM\Column(type="float")
-    */
-    private $Longitude_Position;
-    
+     * @ORM\Column(type="float")
+     */
+    private $longitude;
+
     /**
-    * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="positions")
-    */
-    private $users;
-    
+     * @ORM\OneToMany(targetEntity="App\Entity\Accomplir", mappedBy="positions")
+     */
+    private $accomplirs;
+
     /**
-    * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="position")
-    */
+     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="position")
+     */
     private $questions;
-    
+
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->accomplirs = new ArrayCollection();
         $this->questions = new ArrayCollection();
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
     }
-    
-    public function getLatitudePosition(): ?float
+
+    public function getLatitude(): ?float
     {
-        return $this->Latitude_Position;
+        return $this->latitude;
     }
-    
-    public function setLatitudePosition(float $Latitude_Position): self
+
+    public function setLatitude(float $latitude): self
     {
-        $this->Latitude_Position = $Latitude_Position;
-        
+        $this->latitude = $latitude;
+
         return $this;
     }
-    
-    public function getLongitudePosition(): ?float
+
+    public function getLongitude(): ?float
     {
-        return $this->Longitude_Position;
+        return $this->longitude;
     }
-    
-    public function setLongitudePosition(float $Longitude_Position): self
+
+    public function setLongitude(float $longitude): self
     {
-        $this->Longitude_Position = $Longitude_Position;
-        
+        $this->longitude = $longitude;
+
         return $this;
     }
-    
+
     /**
-    * @return Collection|User[]
-    */
-    public function getUsers(): Collection
+     * @return Collection|Accomplir[]
+     */
+    public function getAccomplirs(): Collection
     {
-        return $this->users;
+        return $this->accomplirs;
     }
-    
-    public function addUser(User $user): self
+
+    public function addAccomplir(Accomplir $accomplir): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
+        if (!$this->accomplirs->contains($accomplir)) {
+            $this->accomplirs[] = $accomplir;
+            $accomplir->setPositions($this);
         }
-        
+
         return $this;
     }
-    
-    public function removeUser(User $user): self
+
+    public function removeAccomplir(Accomplir $accomplir): self
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
+        if ($this->accomplirs->contains($accomplir)) {
+            $this->accomplirs->removeElement($accomplir);
+            // set the owning side to null (unless already changed)
+            if ($accomplir->getPositions() === $this) {
+                $accomplir->setPositions(null);
+            }
         }
-        
+
         return $this;
     }
-    
+
     /**
-    * @return Collection|Question[]
-    */
+     * @return Collection|Question[]
+     */
     public function getQuestions(): Collection
     {
         return $this->questions;
     }
-    
+
     public function addQuestion(Question $question): self
     {
         if (!$this->questions->contains($question)) {
             $this->questions[] = $question;
             $question->setPosition($this);
         }
-        
+
         return $this;
     }
-    
+
     public function removeQuestion(Question $question): self
     {
         if ($this->questions->contains($question)) {
@@ -126,7 +131,7 @@ class Position
                 $question->setPosition(null);
             }
         }
-        
+
         return $this;
     }
 }

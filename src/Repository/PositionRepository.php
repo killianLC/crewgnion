@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Position;
-use app\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -49,35 +48,42 @@ class PositionRepository extends ServiceEntityRepository
     }
     */
     
-    /* public function findAllPositionAutourPosition($latitude,$longitude): array
-    {
-        
-        $qb = $this->createQueryBuilder('p')
-        ->andWhere('distance(p.latitude,:latitude,p.latitude,:latitude,p.longitude,:longitude ) < 1000' )
-        ->orderBy('distance(p.latitude,:latitude,p.latitude,:latitude,p.longitude,:longitude )', 'ASC')
-        ->setParameter('latitude', $latitude)
-        ->setParameter('longitude', $longitude)
-        ->addselect('distance(p.latitude,:latitude,p.latitude,:latitude,p.longitude,:longitude )AS gps')
-        ->getQuery();
-        
-        return $qb->execute();
-    }*/
-    
     /**
-     * @return Position[] Returns an array of Position objects
-     */
-    public function recupPointNF($user_id)
-    {        
-        $query = $this->getEntityManager()->createQuery('select p.id, p.Latitude_Position, p.Longitude_Position
-                                                     FROM App\Entity\Position p
-                                                     WHERE p.id NOT IN (SELECT position.id 
-                                                     FROM App\Entity\Position position, App\Entity\User user
-                                                     WHERE  position.id = user.positions 
-                                                     AND user.id = :id )')
-        ->setParameter('id', $user_id);
-
-        return $query->execute();
+    * @return Position[] Returns an array of Position objects
+    */
+    public function recupPointNF($id_user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+        SELECT p.id, p.latitude, p.longitude
+        FROM App\Entity\Position p
+        WHERE p.id NOT IN (
+            SELECT position.id
+            FROM App\Entity\Position position, App\Entity\User user, App\Entity\Accomplir accomplir
+            WHERE position.id = accomplir.positions
+            AND user.id = accomplir.users
+            AND user.id = :id
+            )')
+            ->setParameter('id', $id_user);
+            
+            return $query->execute();
+        }
         
+        /**
+        * @return Position[] Returns an array of Position objects
+        */
+        public function recupPointF($id_user)
+        {
+            $em = $this->getEntityManager();
+            $query = $em->createQuery('
+            SELECT position.id, position.latitude, position.longitude
+            FROM App\Entity\Position position, App\Entity\User user, App\Entity\Accomplir accomplir
+            WHERE position.id = accomplir.positions
+            AND user.id = accomplir.users
+            AND user.id = :id
+            ')
+            ->setParameter('id', $id_user);
+                
+            return $query->execute();
+        }
     }
-    
-}
