@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maps{% endblock %}                                            
+
+{% block body %}
+<div class="container mt-3">
+    {% for flash_message in app.session.flashBag.get('success') %}
+    <div class="alert alert-success mb-2">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+    <div class="row color_white">
+        <span class="col-xs-11 col-sm-6 col-md-5 mb-2 mr bg-dark border border-primary rounded color_white">
+            <h2 class="text-center">Point n° : {{ position.id }} 
+                {% if positionF is empty %}<span class="badge badge-danger"><i class="far fa-times-circle"></i></span>
+                {% else %}<span class="badge badge-success"><i class="far fa-check-circle"></i></span>
+                {% endif %}</h2>
+            </span>
+            {% if positionF is not empty %}
+            {% for position in positionF %}
+            <span class="col-xs-9 col-sm-5 col-md-3 mb-2 mx-auto bg-dark border border-primary rounded color_white ">
+                <h4 class="text-center mx-auto">Résolue le : {{ position.date | date('d/m/Y') }}</h4>
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="border-top border-primary mt-2 mb-2 mx-auto"></div>  
+    <div id="map" class="mt-3"></div>
+    <div class="container mt-3">
+        <div class="row color_white">
+            <span class="col-xs-11 col-sm-6 col-md-5 mb-2 mx-auto bg-dark border border-primary rounded color_white">
+                <h2 class="text-center mt-1">Distance : {{distance}} Km</h2>
+            </span>
+            <span class="col-xs-11 col-sm-6 col-md-5 mb-2 mx-auto bg-dark border border-primary rounded color_white">
+                
+                    {% if positionF is not empty %}
+                    <h4 class="text-center mt-2">Voir la question : 
+                    <a href="/maps/Question/{{ position.id }}&{{ app.user.id }}&{{ user_lat }}&{{ user_lng }}" class="badge badge-success"><i class="far fa-question-circle"></i></a></h4>
+                    {% elseif distanceM > position.rayon %}
+                    <h4 class="text-center mt-2">Validé la quête : <a class="btn btn-danger disabled"><i class="far fa-times-circle"></i></a></h4>
+                    {% else %}
+                    <h4 class="text-center mt-2">Validé la quête : <a href="/maps/Question/{{ position.id }}&{{ app.user.id }}&{{ user_lat }}&{{ user_lng }}" class="badge badge-success"><i class="far fa-check-circle"></i></a></h4>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        {% endblock %}
+        {% block javascripts %}
+        <script>
+            
+            var map, infoWindow;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {          
+                    zoom: 8,
+                });
+                infoWindow = new google.maps.InfoWindow;
+                
+                var pointF = {
+                    path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
+                    fillColor: '#28a745',
+                    fillOpacity: 1,
+                    scale: 1,
+                    strokeColor: '',
+                    strokeWeight: 0
+                };
+                var pointNF = {
+                    path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
+                    fillColor: '#dc3545',
+                    fillOpacity: 1,
+                    scale: 1,
+                    strokeColor: '',
+                    strokeWeight: 0
+                };
+                
+                var rayonPos = new google.maps.Circle({
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    map: map,
+                    center: {lat: {{ position.latitude }}, lng: {{ position.longitude }}},
+                    radius: {{ position.rayon }}
+                });
+                
+                {% if positionF is empty %}
+                marker = new google.maps.Marker({
+                    map: map,
+                    icon : pointNF,
+                    animation: google.maps.Animation.DROP,
+                    position: {lat: {{ position.latitude }}, lng: {{ position.longitude }}}
+                });
+                {% else %}
+                marker = new google.maps.Marker({
+                    map: map,
+                    icon : pointF,
+                    animation: google.maps.Animation.DROP,
+                    position: {lat: {{ position.latitude }}, lng: {{ position.longitude }}}
+                });
+                {% endif %}
+                
+                
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        var infowindow = new google.maps.InfoWindow({
+                            content: '<div class="container">'+
+                                'Vous êtes ici !'+
+                                '</div>'
+                            });
+                            var marker = new google.maps.Marker({
+                                position: pos,
+                                map: map,
+                                icon: {
+                                    path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
+                                    fillColor: '#007bff',
+                                    fillOpacity: 1,
+                                    scale: 1,
+                                    strokeColor: '',
+                                    strokeWeight: 0
+                                },
+                                animation: google.maps.Animation.DROP
+                            });
+                            marker.addListener('click', function() {
+                                infowindow.open(map, marker);
+                            });
+                            
+                            infoWindow.open(map);
+                            map.setCenter(pos);
+                        }, function() {
+                            handleLocationError(true, infoWindow, map.getCenter());
+                        });
+                    } else {
+                        // Browser doesn't support Geolocation
+                        handleLocationError(false, infoWindow, map.getCenter());
+                    }
+                }
+                
+                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent(browserHasGeolocation ?
+                    'Error: The Geolocation service failed.' :
+                    'Error: Your browser doesn\'t support geolocation.');
+                    infoWindow.open(map);
+                }
+                
+                function toggleBounce() {
+                    if (marker.getAnimation() !== null) {
+                        marker.setAnimation(null);
+                    } else {
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                    }
+                }
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGqu93anG2RuN7R9imKXX9f7OwDsNewh0&callback=initMap">
+        </script>                                          
+        
+        {% endblock %}

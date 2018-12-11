@@ -47,7 +47,7 @@ class UserController extends Controller
                 $manager->persist($user);
                 $manager->flush();
                 
-                return $this->redirectToRoute('security_login');
+                return $this->redirect('security_login');
             }
             
             return $this->render('user/inscription.html.twig',['form' => $form->createView()]);
@@ -72,14 +72,14 @@ class UserController extends Controller
         /**
         * @Route("/user/update/{id}", name="modif")
         */
-        public function modifier($id)
+        public function modifier($id,Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
         {
-            $manager = $this->getDoctrine()->getManager();
             
             $user = $this->getDoctrine()->getRepository(User::class)->find($id);
             
             $form = $this->createForm(RegistrationType::class,$user);
-            
+            $form->handleRequest($request);
+
             if($form->isSubmitted() && $form->isValid())
             {
                 $hash = $encoder->encodePassword($user, $user->getPassword());
@@ -88,6 +88,7 @@ class UserController extends Controller
                 $manager->persist($user);
                 $manager->flush();
                 
+                return $this->redirectToRoute('profil_user', array('id' => $id));
             }
             
             return $this->render('user/modifier.html.twig',['form' => $form->createView()]);

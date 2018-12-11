@@ -8,7 +8,7 @@
         <div class="row">
                 <span class="col-xs-11 col-sm-5 col-md-5 mt-5 mr-2 mb-2 mx-auto bg-dark border border-primary rounded color_white">
                         <h5 class="text-center mt-2">Jeu basé sur votre position et des questions</h5>
-                        <a href="/mapsG/{{app.user.id}}"><img class="img-fluid mt-1 mb-3 " src="{{ asset('images/maps_lannion.png') }}"></a>
+                        <a href="#" id="maps" onclick="getLocation()"><img class="img-fluid mt-1 mb-3 " src="{{ asset('images/maps_lannion.png') }}"></a>
                 </span>
                 <span class="col-xs-11 col-sm-5 col-md-5 mt-5 ml-2 mb-2 mx-auto bg-dark border border-primary rounded color_white">
                         <h5 class="text-center mt-2">Téléchargez l'application</h5>
@@ -18,7 +18,7 @@
         <div class="row">
                 <span class="col-xs-11 col-sm-6 col-md-5 mt-5 mr-2 mb-3 mx-auto bg-dark border border-primary rounded color_white">
                         <h5 class="text-center mt-2">Participez à des tournois et gagnez des récompenses</h5>
-                        <a href="/tournoi/{{app.user.id}}"><img class="img-fluid mt-1 mb-3 " src="{{ asset('images/Tournoi.png') }}"></a>
+                        <a href="/tournoi"><img class="img-fluid mt-1 mb-3 " src="{{ asset('images/Tournoi.png') }}"></a>
                 </span>
                 <span class="col-xs-11 col-sm-6 col-md-5 mt-5 ml-2 mb-3 mx-auto bg-dark border border-primary rounded color_white">
                         <h5 class="text-center mt-2">Achetez des quêtes grâce à vos CrewgnionCoins</h5>
@@ -26,7 +26,34 @@
                 </span>
         </div>        
 </div>
+{% endblock %}
 
-
-
+{% block javascripts %}
+<script>
+        function getLocation(){
+                if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition,errorCallback);                
+                } else {
+                        window.location.assign("/mapsError");
+                }
+        }
+        function showPosition(position) {
+                
+                return window.location.assign("/mapsG/"+{{ app.user.id }}+"&"+position.coords.latitude+"&"+position.coords.longitude);
+                
+        }
+        function errorCallback(error){
+                switch(error.code){
+                        case error.PERMISSION_DENIED:
+                        window.location.assign("/mapsError");
+                        break;          
+                        case error.POSITION_UNAVAILABLE:
+                        window.location.assign("/mapsError");
+                        break;
+                        case error.TIMEOUT:
+                        window.location.assign("/mapsError");
+                        break;
+                }
+        };
+</script>
 {% endblock %}

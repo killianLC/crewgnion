@@ -58,6 +58,11 @@ class Quete
      */
     private $nom;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rayon;
+
     public function __construct()
     {
         $this->resoudres = new ArrayCollection();
@@ -199,6 +204,18 @@ class Quete
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getRayon(): ?int
+    {
+        return $this->rayon;
+    }
+
+    public function setRayon(int $rayon): self
+    {
+        $this->rayon = $rayon;
 
         return $this;
     }

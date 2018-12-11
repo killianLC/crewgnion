@@ -3,27 +3,52 @@
 {% block title %}Maps{% endblock %}                                            
 
 {% block body %}
-<div class="row">
-  <div id="map" class="mt-5"></div>
-  <div class="container col-xs-5 col-sm-3 col-md-2">Légende :
-
+<div class="container mt-3">
+  {% for flash_message in app.session.flashBag.get('success') %}
+  <div class="alert alert-success mb-2">
+    {{ flash_message }}
   </div>
-</div> 
+  {% endfor %}
+  <div class="row color_white">
+    <span class="col-xs-11 col-sm-6 col-md-5 mb-2 mr bg-dark border border-primary rounded color_white">
+      <h2 class="text-center mt-1">Quête : {{ position.getNom() }}
+         {% if queteF is empty %}<span class="badge badge-danger"><i class="far fa-times-circle"></i></span>
+         {% else %}<span class="badge badge-success"><i class="far fa-check-circle"></i></span>
+         {% endif %}</h2>
+    </span>
+    {% if queteF is not empty %}
+    {% for quete in queteF %}
+    <span class="col-xs-9 col-sm-5 col-md-3 mb-2 mx-auto bg-dark border border-primary rounded color_white ">
+      <h4 class="text-center mx-auto mt-2">Résolue le : {{ quete.date | date('d/m/Y') }}</h4>
+    </span>
+    {% endfor %}
+    {% elseif distanceM > position.rayon %}
+    <span class="col-xs-9 col-sm-5 col-md-3 mb-2 mx-auto bg-dark border border-primary rounded color_white ">
+      
+      <h4 class="text-center mx-auto mt-2">Validé la quête : <button class="btn btn-danger"><i class="far fa-times-circle"></i></button></h4>
+    </span>
+    {% else %}
+    <span class="col-xs-9 col-sm-5 col-md-3 mb-2 mx-auto bg-dark border border-primary rounded color_white ">
+      <h4 class="text-center mx-auto">Validé la quête : <a href="/maps/mapsV/{{ position.id }}&{{ app.user.id }}&{{ user_lat }}&{{ user_lng }}" class="badge badge-success"><i class="far fa-check-circle"></i></a></h4>
+    </span>
+    {% endif %}
+  </div>
+</div>
+<div class="border-top border-primary mt-2 mb-2 mx-auto"></div>  
+<div id="map"></div>
 <div class="container mt-3">
   <div class="row color_white">
     <span class="col-xs-11 col-sm-6 col-md-5 mb-2 mx-auto bg-dark border border-primary rounded color_white">
-      <h2 class="mx-auto text-center">Distance : test km</h2>
+      <h2 class="mx-auto text-center">Distance : {{distance}} Km</h2>
     </span>
     <span class="col-xs-11 col-sm-6 col-md-5 mb-2 mx-auto bg-dark border border-primary rounded color_white">
       <h2 class="mx-auto text-center">Récompense : {{ position.getXp() }} Xp</h2>
     </span>
   </div>
 </div>
+{% endblock %}
+{% block javascripts %}
 <script>
-  // Note: This example requires that you consent to location sharing when
-  // prompted by your browser. If you see the error "The Geolocation service
-  // failed.", it means you probably did not give permission for the browser to
-  // locate you.
   var map, infoWindow;
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {          
@@ -31,14 +56,36 @@
     });
     infoWindow = new google.maps.InfoWindow;
     
+    var rayonPos = new google.maps.Circle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: map,
+      center: {lat: {{ position.latitude }}, lng: {{ position.longitude }}},
+      radius: {{ position.rayon }}
+    });
+    
+    {% if queteF is empty %}
     var point = {
       path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
-      fillColor: '#007bff',
+      fillColor: '#dc3545',
       fillOpacity: 1,
       scale: 1,
       strokeColor: '',
       strokeWeight: 0
     };
+    {% else %}
+    var point = {
+      path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
+      fillColor: '#28a745',
+      fillOpacity: 1,
+      scale: 1,
+      strokeColor: '',
+      strokeWeight: 0
+    };
+    {% endif %}
     
     marker = new google.maps.Marker({
       map: map,
@@ -64,7 +111,7 @@
             map: map,
             icon: {
               path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
-              fillColor: '#dc3545',
+              fillColor: '#007bff',
               fillOpacity: 1,
               scale: 1,
               strokeColor: '',
@@ -101,6 +148,12 @@
       } else {
         marker.setAnimation(google.maps.Animation.BOUNCE);
       }
+    }
+  </script>
+  <script>
+    function alert()
+    {
+      alert('Vous devez vous rapprochez de la quête pour la validé ')
     }
   </script>
   <script async defer

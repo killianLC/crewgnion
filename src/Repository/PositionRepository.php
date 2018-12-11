@@ -55,15 +55,16 @@ class PositionRepository extends ServiceEntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-        SELECT p.id, p.latitude, p.longitude
-        FROM App\Entity\Position p
+        SELECT p.id, p.latitude, p.longitude, v.nomVille
+        FROM App\Entity\Position p, App\Entity\Ville v
         WHERE p.id NOT IN (
             SELECT position.id
             FROM App\Entity\Position position, App\Entity\User user, App\Entity\Accomplir accomplir
             WHERE position.id = accomplir.positions
             AND user.id = accomplir.users
             AND user.id = :id
-            )')
+            )
+            AND v.id = p.ville')
             ->setParameter('id', $id_user);
             
             return $query->execute();
@@ -76,14 +77,33 @@ class PositionRepository extends ServiceEntityRepository
         {
             $em = $this->getEntityManager();
             $query = $em->createQuery('
-            SELECT position.id, position.latitude, position.longitude
-            FROM App\Entity\Position position, App\Entity\User user, App\Entity\Accomplir accomplir
+            SELECT position.id, position.latitude, position.longitude, ville.nomVille
+            FROM App\Entity\Position position, App\Entity\User user, App\Entity\Accomplir accomplir, App\Entity\Ville ville
             WHERE position.id = accomplir.positions
             AND user.id = accomplir.users
             AND user.id = :id
-            ')
+            AND ville.id = position.ville')
             ->setParameter('id', $id_user);
-                
+            
+            return $query->execute();
+        }
+        /**
+        * @return Position[] Returns an array of Position objects
+        */
+        public function pointF($id_user, $id)
+        {
+            $em = $this->getEntityManager();
+            $query = $em->createQuery(' 
+            SELECT position.id, position.latitude, position.longitude, position.rayon, ville.nomVille, accomplir.date
+            FROM App\Entity\Position position, App\Entity\Ville ville, App\Entity\Accomplir accomplir, App\Entity\User user
+            WHERE position.id = accomplir.positions
+            AND user.id = accomplir.users
+            AND position.id = :id
+            AND user.id = :id_user
+            AND ville.id = position.ville')
+            ->setParameter('id_user', $id_user)
+            ->setParameter('id', $id);
+            
             return $query->execute();
         }
     }

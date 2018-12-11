@@ -67,7 +67,16 @@ class UserRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('u')
         ->where('u.username=:username')
         ->setParameter('username', $username)
-        ->select('u.username', 'u.id', 'u.password')
+        ->select('u.username', 'u.id', 'u.password', 'u.xp', 'u.coin')
+        ->getQuery();
+        
+        return $qb->execute();
+    }
+
+    public function findUserByXp(){
+        $qb = $this->createQueryBuilder('u')
+        ->select('u.username', 'u.id', 'u.password', 'u.xp', 'u.coin')
+        ->orderBy('u.xp')
         ->getQuery();
         
         return $qb->execute();

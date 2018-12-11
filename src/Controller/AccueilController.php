@@ -54,6 +54,14 @@ class AccueilController extends AbstractController
                         return $this->render('accueil/profil.html.twig', array('r1'=>$user, 'quetes'=>$quetes));
                     }
                     return $this->render('accueil/profil.html.twig', array('r1'=>$user, 'quetes'=>$quetes));
-                }         
+                }
+            /**
+             * @Route("/info", name="info")
+             */
+            public function info()
+            {
+                return $this->render('accueil/info.html.twig');
+            }
+                
                 
             }

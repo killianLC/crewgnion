@@ -6,6 +6,11 @@
 
 <h2 class="color_white mt-5"> Classement : <i class="{{ grade.getPhoto() }}"></i> {{ grade.getNomGrade() }}</h2>
 
+{% if users is empty %}
+<div class="alert alert-danger mt-4" role="alert">
+    Aucun joueur est au grade <i class="{{ grade.getPhoto() }}"></i> {{ grade.getNomGrade() }}.
+</div>
+{% else %}
 <div class="container mt-4">
     <div class="table-responsive-md">
         <table class="table table-dark">
@@ -33,5 +38,6 @@
         </table>
     </div>
 </div>
+{% endif %}
 
 {% endblock %}

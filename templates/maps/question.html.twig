@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question{% endblock %}                                            
+
+{% block body %}
+
+<div class="row color_white mt-2">
+    <a href="javascript:history.go(-1)" class="btn btn-warning btn-sm rounded"><i class="fas fa-arrow-left"></i> Retour</a>
+    <span class="col-xs-7 col-sm-4 col-md-3 ml-2 mb-2 bg-dark border border-primary rounded color_white">
+        <h4 class="text-center mt-1">Point n° : {{ position.id }} 
+            {% if positionF is empty %}<span class="badge badge-danger"><i class="far fa-times-circle"></i></span>
+            {% else %}<span class="badge badge-success"><i class="far fa-check-circle"></i></span>
+            {% endif %}
+        </h4>
+    </span>
+</div>
+<div class="border-top border-primary mt-3 mb-3 mx-auto"></div>
+<div class="card text-center bg-dark color_white">
+    <div class="card-header">
+        <h4>Question : {{ question.getLibelleQuestion }}</h4>
+    </div>
+    <div class="row card-body">
+        {% for reponse in reponses %}
+        <a href="#" class="btn btn-primary">{{ reponse.getLibelleReponse() }}</a>
+        {% endfor %}
+    </div>
+</form>
+</div>
+</span>
+</div>
+
+{% endblock %}

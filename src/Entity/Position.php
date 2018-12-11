@@ -34,9 +34,19 @@ class Position
     private $accomplirs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="position")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="positions")
      */
-    private $questions;
+    private $ville;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rayon;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Question", cascade={"persist", "remove"})
+     */
+    private $question;
 
     public function __construct()
     {
@@ -104,33 +114,40 @@ class Position
         return $this;
     }
 
-    /**
-     * @return Collection|Question[]
-     */
-    public function getQuestions(): Collection
+    
+
+    public function getVille(): ?Ville
     {
-        return $this->questions;
+        return $this->ville;
     }
 
-    public function addQuestion(Question $question): self
+    public function setVille(?Ville $ville): self
     {
-        if (!$this->questions->contains($question)) {
-            $this->questions[] = $question;
-            $question->setPosition($this);
-        }
+        $this->ville = $ville;
 
         return $this;
     }
 
-    public function removeQuestion(Question $question): self
+    public function getRayon(): ?int
     {
-        if ($this->questions->contains($question)) {
-            $this->questions->removeElement($question);
-            // set the owning side to null (unless already changed)
-            if ($question->getPosition() === $this) {
-                $question->setPosition(null);
-            }
-        }
+        return $this->rayon;
+    }
+
+    public function setRayon(int $rayon): self
+    {
+        $this->rayon = $rayon;
+
+        return $this;
+    }
+
+    public function getQuestion(): ?Question
+    {
+        return $this->question;
+    }
+
+    public function setQuestion(?Question $question): self
+    {
+        $this->question = $question;
 
         return $this;
     }

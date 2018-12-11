@@ -5,33 +5,35 @@
 {% block body %}
 <div class="border-top border-primary mt-2 mx-auto"></div>  
 <div class="color_white mt-2">
-  <h5>Positions Validées : <span class="badge badge-success">{{ nbPositionsF }}</span></h5>
-  <h5>Positions toujours pas validées : <span class="badge badge-danger">{{ nbPositionsNF }}</span></h5>
+  <h5>Positions Validées : <span class="badge badge-success">{{ nbPositionsF }}</span> <a class="btn btn-success btn-sm fas fa-align-justify" href="/maps/listePositionF/{{ app.user.id }}&{{ user_lat }}&{{ user_lng }}"></a></h5>
+  <h5>Positions toujours pas validées : <span class="badge badge-danger">{{ nbPositionsNF }}</span> <a class="btn btn-danger btn-sm fas fa-align-justify" href="/maps/listePositionNF/{{ app.user.id }}&{{ user_lat }}&{{ user_lng }}"></a></h5>
 </div>
 <div class="border-top border-primary mt-2 mx-auto"></div>                             
 <div id="map" class="mt-2"></div>
 <div class="mt-3">
   <div class="row">
     {% for positionNF in positionsNF %}
-    <span class="col-xs-9 col-sm-5 col-md-2 mb-2 mx-auto bg-dark border border-primary rounded color_white">
+    <span class="col-xs-5 col-sm-3 col-md-2 mb-2 mx-auto bg-dark border border-primary rounded color_white">
       
       <div class="mt-2 mb-2">
-        <h5 class="text-center">{{ positionNF.id }} - <span class="mr-2 badge badge-danger">Non Validé</span></h5> 
+        <h5 class="text-center">{{ positionNF.id }} - <a href="/maps/mapsI/{{ positionNF.id }}&{{ app.user.id }}&{{ user_lat }}&{{ user_lng }}"><span class="mr-2 badge badge-danger">Non Validé</span></a></h5>
       </div>
       
     </span>
     {% endfor %}
     {% for positionF in positionsF %}
-    <span class="col-xs-9 col-sm-5 col-md-2 mb-2 mx-auto bg-dark border border-primary rounded color_white">
+    <span class="col-xs-9 col-sm-4 col-md-2 mb-2 mx-auto bg-dark border border-primary rounded color_white">
       
       <div class="mt-2 mb-2">
-        <h5 class="text-center">{{ positionF.id }} - <span href="" class="badge badge-success">Validé !</span></h5> 
+        <h5 class="text-center">{{ positionF.id }} - <a href="/maps/mapsI/{{ positionF.id }}&{{ app.user.id }}&{{ user_lat }}&{{ user_lng }}"><span class="badge badge-success">Validé !</span></a></h5> 
       </div>      
       
     </span>
     {% endfor %}
   </div>
 </div>
+{% endblock %}
+{% block javascripts %}
 <script>
   
   function initMap() {
@@ -64,8 +66,7 @@
       map: map,
       icon : pointF,
       position: new google.maps.LatLng({{ positionF.latitude }},{{ positionF.longitude }}),
-      animation: google.maps.Animation.DROP,
-      labelContent: {{ positionF.id }}
+      animation: google.maps.Animation.DROP
     });
     {% endfor %} 
     
@@ -134,9 +135,8 @@
     }
     
   </script>
+  
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGqu93anG2RuN7R9imKXX9f7OwDsNewh0&libraries=geometry&callback=distance&callback=initMap"></script>
   <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
   </script>
-  <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGqu93anG2RuN7R9imKXX9f7OwDsNewh0&callback=initMap">
-</script>
 {% endblock %}

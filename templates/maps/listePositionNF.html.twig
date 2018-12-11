@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Position{% endblock %}
+
+{% block body %}
+<h2 class="text-center color_white mt-5">Positions non validées :</h2>
+<div class="border-top border-primary mt-2 mx-auto">
+</div>
+<div class="table-responsive-md mt-3">
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">N°</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Position</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for positionNF in positionsNF %}
+            <tr>
+                <th class="color_white" scope="row">{{ positionNF.id }}</a></th>
+                <td>{{ positionNF.nomVille }}</td>
+                <td><a class="btn btn-warning fas fa-map-marked-alt" href="/maps/mapsI/{{ positionNF.id }}&{{ app.user.id }}&{{ user_lat }}&{{ user_lng }}"></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
