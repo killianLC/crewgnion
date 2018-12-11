@@ -2,3 +2,13 @@ ApiConnexion:
   path: /api_connexion
   controller: App\Controller\ApiController::api_connexion
   methods: [POST]
+
+ApiQuete:
+  path: /api_quete
+  controller: App\Controller\ApiController::api_quete
+  methods: [GET]
+
+ApiClassement:
+  path: /api_classement
+  controller: App\Controller\ApiController::api_classement
+  methods: [GET]

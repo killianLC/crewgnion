@@ -65,7 +65,14 @@ class QueteRepository extends ServiceEntityRepository
             AND user.id = :id
         )')
         ->setParameter('id', $id_user);
-
         return $query->execute();
+    }
+
+    public function findQuete(){
+        $qb = $this->createQueryBuilder('q')
+        ->select('q.id', 'q.descriptif', 'q.xp', 'q.prix', 'q.latitude', 'q.longitude', 'q.nom' )
+        ->getQuery();
+        
+        return $qb->execute();
     }
 }
