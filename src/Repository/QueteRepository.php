@@ -68,6 +68,25 @@ class QueteRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    /**
+     * @return Quete[] Returns an array of Quete objects
+     */
+    public function QueteF($id_user, $id)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+        SELECT q.id, q.nom, q.latitude, q.longitude, q.xp, q.prix, r.date
+        FROM App\Entity\Quete q, App\Entity\User u, App\Entity\Resoudre r
+        WHERE q.id = r.quete
+        AND u.id = r.user
+        AND u.id = :id_user
+        AND q.id = :id
+        ')
+        ->setParameter('id_user', $id_user)
+        ->setParameter('id', $id);
+        return $query->execute();
+    }
+
     public function findQuete(){
         $qb = $this->createQueryBuilder('q')
         ->select('q.id', 'q.descriptif', 'q.xp', 'q.prix', 'q.latitude', 'q.longitude', 'q.nom' )
