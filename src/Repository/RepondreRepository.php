@@ -47,4 +47,24 @@ class RepondreRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+    * @return Repondre[] Returns an array of Repondre objects
+     */
+    public function nbRepondre($id_user, $id_question)
+    {
+        $em = $this->getEntityManager();
+            $query = $em->createQuery(' 
+            SELECT repondre.id
+            FROM App\Entity\Question question, App\Entity\Repondre repondre, App\Entity\Reponse reponse, App\Entity\User user
+            WHERE question.id = reponse.question
+            AND reponse.id = repondre.reponses
+            AND user.id = repondre.users
+            AND question.id = :id_question
+            AND user.id = :id_user')
+            ->setParameter('id_user', $id_user)
+            ->setParameter('id_question', $id_question);
+            
+            return $query->execute();
+    }
 }
