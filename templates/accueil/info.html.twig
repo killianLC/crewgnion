@@ -2,4 +2,19 @@
 
 {% block body %}
 
+<h4 class=" mt-2 text-center color_white">Site réalisé par Johan Belhomme grâce au framework Symfony et à la library Bootstrap</h4>
+
+<img class="col-xs-11 col-sm-5 col-md-5 mt-5 mr-2 mb-2 " src="{{ asset('images/symfony.png') }}">
+<img class=" col-xs-9 col-sm-4 col-md-3 mt-5 mr-2 mb-2 " src="{{ asset('images/bootstrap.png') }}">
+
+<div class="border-top border-primary mt-2 mb-2 mx-auto"></div>
+
+<div class="col-xs-11 col-sm-6 col-md-5 mb-2 mt-2 bg-dark border border-primary rounded color_white">
+Nombre d'inscrit : <span class="badge badge-primary">{{ nbUser }}</span><br>
+Nombre de CC total collecter: <span class="badge badge-warning">{{ nbCC }}</span><br>
+Nombre d'experience collecter : <span class="badge badge-success">{{ nbXp }}</span><br>
+Nombre de tournois réalisé sur le site : <span class="badge badge-secondary">{{ nbT }}</span><br>
+</div>
+
+
 {% endblock %}

@@ -10,10 +10,9 @@ class TournoiController extends AbstractController
     /**
      * @Route("/tournoi", name="tournoi")
      */
-    public function index()
+    public function tournoi_accueil()
     {
-        return $this->render('tournoi/index.html.twig', [
-            'controller_name' => 'TournoiController',
-        ]);
+
+        return $this->render('tournoi/index.html.twig');
     }
 }

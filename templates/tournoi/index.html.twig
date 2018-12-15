@@ -7,7 +7,25 @@
         <h2 class="color_white">Tournois Crewgnion :</h2>
             <div class="border-top border-primary mt-2 mx-auto"></div>
             
-            <div class="alert alert-danger mt-5">Les tournois seront bientôt disponible</div>
+            <div class="table-responsive-md mt-3">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom du tournoi</th>
+                            <th scope="col">Date début -> Date fin</th>
+                            <th scope="col">Participants</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tournoi in tournois %}
+                        <tr>
+                            <th class="color_white" scope="row">{{ positionF.id }}</a></th>
+                            <td>{{ positionF.nomVille }}</td>
+                            <td><a class="btn btn-warning fas fa-map-marked-alt" href="/maps/mapsI/{{ positionF.id }}&{{ app.user.id }}&{{ user_lat }}&{{ user_lng }}"></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
       
         {% endblock %}
         {% block javascripts %}

@@ -43,6 +43,16 @@ class Tournoi
      */
     private $questions;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $recompense;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $etat;
+
     public function __construct()
     {
         $this->participers = new ArrayCollection();
@@ -143,6 +153,30 @@ class Tournoi
         if ($this->questions->contains($question)) {
             $this->questions->removeElement($question);
         }
+
+        return $this;
+    }
+
+    public function getRecompense(): ?int
+    {
+        return $this->recompense;
+    }
+
+    public function setRecompense(int $recompense): self
+    {
+        $this->recompense = $recompense;
+
+        return $this;
+    }
+
+    public function getEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(bool $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

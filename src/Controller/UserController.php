@@ -47,7 +47,7 @@ class UserController extends Controller
                 $manager->persist($user);
                 $manager->flush();
                 
-                return $this->redirect('security_login');
+                return $this->redirectToRoute('security_login');
             }
             
             return $this->render('user/inscription.html.twig',['form' => $form->createView()]);

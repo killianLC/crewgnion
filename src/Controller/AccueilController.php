@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Grade;
 use App\Entity\Acquerir;
 use App\Entity\Quete;
+use App\Entity\Tournoi;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,7 +61,23 @@ class AccueilController extends AbstractController
              */
             public function info()
             {
-                return $this->render('accueil/info.html.twig');
+                $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+
+                $tournois = $this->getDoctrine()->getRepository(Tournoi::class)->findAll();
+
+                $nbT = count($tournois);
+
+                $nbUser = count($users);
+
+                $nbCC = 0;
+                $nbXp = 0;
+
+                foreach($users as $user)
+                {
+                    $nbCC += $user->getCoin();                    
+                    $nbXp += $user->getXp();
+                }
+                return $this->render('accueil/info.html.twig', array('nbUser' => $nbUser, 'nbCC' => $nbCC, 'nbXp' => $nbXp, 'nbT' => $nbT));
             }
                 
                 
