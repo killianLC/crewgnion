@@ -1,3 +1,0 @@
-0
-%255BApp%255CEntity%255CUser%2524confirm_password%255D%255B1%255D
-a:1:{i:0;O:47:"Symfony\Component\Validator\Constraints\EqualTo":5:{s:7:"message";s:36:"Les 2 mots de passe sont différents";s:5:"value";N;s:12:"propertyPath";s:8:"password";s:7:"payload";N;s:6:"groups";a:1:{i:0;s:7:"Default";}}}
